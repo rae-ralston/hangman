@@ -21,6 +21,24 @@
     - http://www.berkeleyinternet.com/perl/node30.html
     - http://ascii.co.uk/art/hangman
 - Support for guessing full word
+- multi word game
+
+### Todo
+- write a route that can get the word from the API
+- write game logic that starts a game
+- write logic for check guess
+  - if correct push to letter display 
+      - check if game won
+  - if incorrect 
+      - --guess left, 
+      - add to guessed letters, 
+      - STRETCH add hanging man view
+      - check if game lost
+- write game logic that ends a game
+    + if won give won data to modal
+    + if lost give lost data modal
+    + (both modal have restart game, stretch: multi word games)
+
 
 ## Contact
 
