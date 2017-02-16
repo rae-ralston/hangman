@@ -22,6 +22,8 @@
     - http://ascii.co.uk/art/hangman
 - Support for guessing full word
 - multi word game
+  + add score += 1 to correct answer logic
+  + slice used words out of total words array
 
 ### Todo
 - write a route that can get the word from the API

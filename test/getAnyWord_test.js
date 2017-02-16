@@ -2,7 +2,7 @@ import { expect } from 'chai'
 const {
   getAnyNewWord, 
   getSpecificLengthWord, 
-  chooseAWord
+  oneRandomWord
 } = require('../models/game')
 
 describe('getAnyNewWord()', () => {
@@ -15,13 +15,13 @@ describe('getAnyNewWord()', () => {
 describe('getSpecificLengthWord()', () => {
 
   it('should be a function', () => {
-    expect(getAnyNewWord).to.be.a('function')
+    expect(getSpecificLengthWord).to.be.a('function')
   })
 })
 
-describe('chooseAWord()', () => {
+describe('oneRandomWord()', () => {
 
   it('should be a function', () => {
-    expect(getAnyNewWord).to.be.a('function')
+    expect(oneRandomWord).to.be.a('function')
   })
 })

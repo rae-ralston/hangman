@@ -16,20 +16,34 @@ const getSpecificLengthWord = (level, minWordLength) => {
     .catch(err => console.error(err))
 }
 
-const chooseAWord = words => {
-  words = words.split('\n')
-  // TODO for multi word games at same dificulty level slice used words out of array
+const oneRandomWord = words => {
   const wordIndex = getRandomInt(0, words.length)
+  
+  words = words.split('\n')
   console.log('words', words[wordIndex])
   return words[wordIndex]
 }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+const getRandomInt = (min, max) => 
+  Math.floor(Math.random() * (max - min + 1) + min)
+
+const checkGuess = (word, guess) => 
+  word.includes(guess) ? correctAnswer() : incorrectAnswer()
+
+const correctAnswer = () => {
+  // display updated game/guess UI
+  console.log('You got it right!')
 }
+const incorrectAnswer = () => {
+  // guesses left -= 1
+  // push letters to guessed letters UI
+  console.log('Wrong :<')
+}
+
 
 module.exports = {
   getAnyNewWord,
   getSpecificLengthWord,
-  chooseAWord
+  oneRandomWord,
+  checkGuess
 }
