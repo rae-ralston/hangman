@@ -18,7 +18,7 @@ const getSpecificLengthWord = (level, minWordLength) => {
 
 const oneRandomWord = words => {
   const wordIndex = getRandomInt(0, words.length)
-  
+
   words = words.split('\n')
   console.log('words', words[wordIndex])
   return words[wordIndex]
