@@ -5,7 +5,7 @@ const {
   getSpecificLengthWord, 
   uniqueLetters
 } = require('../models/words')
-const {getGameInfo, checkLocal} = require('../models/localStorage')
+const {getMyGameInfo, checkLocal} = require('../models/localStorage')
 const {runGame} = require('../models/gameStatus')
 
 router.get('/', (request, response) => {
@@ -32,25 +32,18 @@ router.get('/newgame', (request, response) => {
 router.get('/play', (request, response) => {
   // game is saved in local
   // now game logic
-  console.log('checking local in play')
-  checkLocal()
-  let hello = getGameInfo()
-  console.log('hello?', hello)
-  response.render('index')
-  //   .then(info => {
-  //     console.log('info', info)
-  //     let {
-  //       correctGuessedLetters,
-  //       currentWord,
-  //       incorrectGuessCount,
-  //       incorrectGuesses} = info
-  //     response.render('index', {
-  //       correctGuessedLetters,
-  //       currentWord,
-  //       incorrectGuessCount,
-  //       incorrectGuesses
-  //     })
-  // })
+  let gameInfo = getMyGameInfo()
+  let {
+    correctGuessedLetters,
+    currentWord,
+    incorrectGuessCount,
+    incorrectGuesses} = gameInfo
+  response.render('index', {
+    correctGuessedLetters,
+    currentWord,
+    incorrectGuessCount,
+    incorrectGuesses
+  })
 })
 
 router.get('/checkAnswer', (request, response) => {

@@ -9,6 +9,7 @@ const {
 } = require('./localStorage')
 
 const runGame = wordInfo => {
+  clear()
   const incorrectGuesses = 0
   const {word, uniqueLetters} = wordInfo
   const guessedLetters = ""

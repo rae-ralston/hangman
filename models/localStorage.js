@@ -30,16 +30,17 @@ const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount')
 const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getUniqueLetters = () => getSettings('uniqueLetters')
 
-const getGameInfo = () => {
-  let currentWord = getSettings('currentWord')
-  let correctGuessedLetters = getSettings('correctGuessedLetters')
-  console.log('correct geame setting s in game info', correctGuessedLetters)
-  return {
-    correctGuessedLetters,
-    currentWord,
+function getMyGameInfo() {
+  // console.log('inget game info')
+  let gameInfo = {
+    correctGuessedLetters: getSettings('correctGuessedLetters'),
+    currentWord: getSettings('currentWord'),
     incorrectGuessCount: getIncorrectGuessCount(),
     incorrectGuessedLetters: getIncorrectGuessedLetters()
   }
+  console.log('after gminfo define')
+
+  return gameInfo
 }
 
 module.exports = {
@@ -47,7 +48,7 @@ module.exports = {
   getCurrentWord,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
-  getGameInfo,
+  getMyGameInfo,
   getUniqueLetters,
   saveSettings, 
   getSettings, 
