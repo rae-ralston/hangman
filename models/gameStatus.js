@@ -1,5 +1,12 @@
 const {newGameWord} = require('./words')
-const {getIncorrectGuessCount, saveSettings} = require('./localStorage')
+const {
+  getCorrectGuessedLetters,
+  getCurrentWord,
+  getGuessedLetters,
+  getIncorrectGuessCount,
+  getUniqueLetters,
+  saveSettings
+} = require('./localStorage')
 
 const runGame = wordInfo => {
   const incorrectGuesses = 0
@@ -7,32 +14,63 @@ const runGame = wordInfo => {
   const guessedLetters = ""
   const correctGuessedLetters = ""
 
-  localStorage.clear()
-  
-  writeLettersToDOM(currentWord)
-  resetHeader()
-
   saveSettings('currentWord', word)
   saveSettings('uniqueLetters', uniqueLetters)
   saveSettings('incorrectGuessCount', incorrectGuesses)
-  saveSettings('guessedLetters', guessedLetters)
+  saveSettings('incorrectGuessedLetters', guessedLetters)
   saveSettings('correctGuessedLetters', correctGuessedLetters)
 }
 
+const checkGuess = guessLetter => {
+  let uniqueLetters = getUniqueLetters()
+
+  if(uniqueLetters.includes(guessLetter)) {
+    saveCorrectGuess(guessLetter)
+    checkForWin()
+  } else {
+    incorrectGuess(guessedLetter)
+    checkForLoss()
+  }
+}
+
+const saveCorrectGuess = letter => {
+  let correctGuesses = getCorrectGuessedLetters()
+
+  correctGuesses += letter
+  saveSettings('correctGuessedLetters', correctGuesses)
+}
+
+const incorrectGuess = letter => {
+  let incorrectGuessCount = getIncorrectGuessCount();
+  let incorrectGuesses = getGuessedLetters();
+
+  incorrectGuessCount += 1
+  incorrectGuesses += letter
+  saveSettings('incorrectGuessCount', incorrectGuessCount)
+  saveSettings('guessedLetters', incorrectGuesses)
+}
+
+const correctGuess = letter => {
+  let correctGuesses = getCorrectGuessedLetters()
+
+  correctGuesses += letter
+  saveSettings('correctGuessedLetters', correctGuesses)
+}
+
 const checkForWin = () => {
-  let correctGuesses = getSettings('correctGuessedLetters')
-  let uniqueLetters = getSettings('uniqueLetters')
+  let correctGuesses = getCorrectGuessedLetters()
+  let uniqueLetters = getUniqueLetters()
+
+  if(correctGuesses.length === uniqueLetters) 
+    console.log("Congratualtions, you've saved a life today.")
   return correctGuesses.length === uniqueLetters
 }
 
-const loseGame = () => {
-  const modal = document.getElementById('win-modal')
-  modal.show()
-  // document.getElementById('dismiss').onclick = () => {modal.close()}
-  // document.getElementById('play-again').onclick = () => {
-  //   modal.close()
-  //   runGame()
-  // }
+const checkForLoss = () => {
+  let incorrectGuesses = getIncorrectGuessCount()
+
+  if(incorrectGuesses >= 6)
+    console.log("Bummer, you lost the game.")
 }
 
 module.exports = {runGame}

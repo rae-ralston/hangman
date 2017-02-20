@@ -48,22 +48,7 @@ const uniqueLetters = word => {
   return uniqueLetters
 }
 
-const checkGuess = guessLetter => {
-  let uniqueLetters = getUniqueLetters()
-  if(uniqueLetters.includes(guessLetter)) {
-    saveCorrectGuess(guessLetter)
-  }
-}
-
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)
-
-// const writeLettersToDOM = newOrder => {
-//   const domNode = document.getElementById('word');
-// }
-
-// function getGuess () {
-//   const currentGuess = document.getElementById('guess').value.toUpperCase().split('');
-// }
 
 module.exports = {newGameWord, oneRandomWord, getSpecificLengthWord, uniqueLetters}
