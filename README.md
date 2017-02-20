@@ -26,8 +26,8 @@
   + slice used words out of total words array
 
 ### Todo
-- write a route that can get the word from the API
-- write game logic that starts a game
+√ write a route that can get the word from the API
+√ write game logic that starts a game
 - write logic for check guess
   - if correct push to letter display 
       - check if game won

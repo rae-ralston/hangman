@@ -1,32 +1,33 @@
-// The things I'm saving
-// word
-// uniqueLetters 
-// incorrectGuessCount
-// guessedLetters 
-
 const saveSettings = (name, settings) => {
-  const name = name.toString();
-  const settings = settings.toString();
+  const saveName = name.toString();
+  const saveSettings = settings.toString();
 
-  (typeof(name) === 'string' && typeof(settings) === 'string')
-    ? localStorage.setItem(name, settings)
-    : console.log('Error: Saving state of ' + name + ': ' + settings);
+  (typeof(saveName) === 'string' && typeof(saveSettings) === 'string')
+    ? localStorage.setItem(saveName, saveSettings)
+    : console.log('Error in saving state of ' + saveName + ': ' + saveSettings);
 }
 
 const getSettings = name => {
-  if (name === ('currentWord' || 'uniqueLetters' || 'guessedLetters')) 
+  if (name === ('currentWord' || 'uniqueLetters' || 'guessedLetters' || 'correctGuessedLetters')) 
     return localStorage.getItem(name)
   else if (name === 'incorrectGuessCount') 
     return (parseInt(localStorage.getItem(name)))
   else {console.log('Error in getting setting ' + name)}
 }
 
-const getIncorrectGuesses = () => parseInt(getSettings('incorrectGuessCount'))
+const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
+const getUniqueLetters = () => getSettings('uniqueLetters')
 
-const incrementGuesses = () => {
-  let incorrectGuesses = getIncorrectGuesses();
+const incrementBadGuesses = () => {
+  let incorrectGuesses = getIncorrectGuessCount();
   incorrectGuesses += 1
   saveSettings('incorrectGuessCount', incorrectGuesses)
 }
 
-module.exports = {getIncorrectGuesses, saveSettings, getSettings, incrementScore}
+module.exports = {
+  getIncorrectGuessCount,
+  getUniqueLetters,
+  saveSettings, 
+  getSettings, 
+  incrementBadGuesses
+}

@@ -6,6 +6,7 @@ const {
   oneRandomWord, 
   getSpecificLengthWord, 
   uniqueLetters} = require('../models/words')
+const {runGame} = require('../models/gameStatus')
 
 router.get('/', (request, response) => {
   let newWord = newGameWord()
@@ -23,8 +24,8 @@ router.get('/newGame', (request, response) => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
-      let game = new Game(`${wordInfo.word}`,`${wordInfo.uniqueLetters}`)
-      response.send(game)
+      let game = runGame(wordInfo)
+      response.render('game/game', {wordInfo})
     })
     .catch(err => console.error(err))
 })

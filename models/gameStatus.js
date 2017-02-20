@@ -1,9 +1,9 @@
 const {newGameWord} = require('./words')
-const {getIncorrectGuesses, saveSettings} = require('./localStorage')
+const {getIncorrectGuessCount, saveSettings} = require('./localStorage')
 
-const runGame = () => {
+const runGame = wordInfo => {
   const incorrectGuesses = 0
-  const {word, uniqueLetters} = newGameWord().then(info => info)
+  const {word, uniqueLetters} = wordInfo
   const guessedLetters = ""
   const correctGuessedLetters = ""
 
@@ -18,29 +18,21 @@ const runGame = () => {
   saveSettings('guessedLetters', guessedLetters)
   saveSettings('correctGuessedLetters', correctGuessedLetters)
 
-  const mainGameInterval = setInterval(() =>{
-    if (checkForLoss()) {
+  const mainGameInterval = setInterval(() => {
+    if (getIncorrectGuessCount() >= 6) {
       clearInterval(mainGameInterval)
       looseGame()
-    } else if () {
+    } else if (checkForWin()) {
       clearInterval(mainGameInterval)
-
+      looseGame() //TODO update to win game/lose game modals
     }
   }, 1000)
 }
 
-const checkForLoss = () => getIncorrectGuesses() >= 6
 const checkForWin = () => {
-  let guessedLetters = getSettings('guessedLetters')
+  let correctGuesses = getSettings('correctGuessedLetters')
   let uniqueLetters = getSettings('uniqueLetters')
-  guessedLetters.split('').reduce((overlap, letter, i) => {
-    
-    return overlap
-  }, "")
-  for(let i = 0; i < guessed.length; i++){
-    
-    if(uniqueLetters.length === )
-  }
+  return correctGuesses.length === uniqueLetters
 }
 
 const loseGame = () => {
@@ -53,3 +45,4 @@ const loseGame = () => {
   }
 }
 
+module.exports = {runGame}

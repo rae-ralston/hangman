@@ -1,6 +1,8 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 // TODO: try https://github.com/github/fetch && do I really need isomorphic
+const {getIncorrectGuessCount, getUniqueLetters, saveSettings} = require('./localStorage')
+
 
 const getAnyNewWord = () => {
   const library = 'http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words'
@@ -42,21 +44,30 @@ const uniqueLetters = word => {
   return uniqueLetters
 }
 
+const checkGuess = guessLetter => {
+  let uniqueLetters = getUniqueLetters()
+  if(uniqueLetters.includes(guessLetter)) {
+    
+  }
+}
+
+
+
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)
 
-const getLettersFromDOM () {
+// const getLettersFromDOM () => {
 
-}
+// }
 
-const writeLettersToDOM = newOrder => {
-  var domNode = document.getElementById('word');
+// const writeLettersToDOM = newOrder => {
+//   const domNode = document.getElementById('word');
 
-}
+// }
 
-function getGuess () {
-  var currentGuess = document.getElementById('guess').value.toUpperCase().split('');
+// function getGuess () {
+//   const currentGuess = document.getElementById('guess').value.toUpperCase().split('');
   
-}
+// }
 
 module.exports = {newGameWord, oneRandomWord, getSpecificLengthWord, uniqueLetters}
