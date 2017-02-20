@@ -17,16 +17,6 @@ const runGame = wordInfo => {
   saveSettings('incorrectGuessCount', incorrectGuesses)
   saveSettings('guessedLetters', guessedLetters)
   saveSettings('correctGuessedLetters', correctGuessedLetters)
-
-  const mainGameInterval = setInterval(() => {
-    if (getIncorrectGuessCount() >= 6) {
-      clearInterval(mainGameInterval)
-      looseGame()
-    } else if (checkForWin()) {
-      clearInterval(mainGameInterval)
-      looseGame() //TODO update to win game/lose game modals
-    }
-  }, 1000)
 }
 
 const checkForWin = () => {
@@ -38,11 +28,11 @@ const checkForWin = () => {
 const loseGame = () => {
   const modal = document.getElementById('win-modal')
   modal.show()
-  document.getElementById('dismiss').onclick = () => {modal.close()}
-  document.getElementById('play-again').onclick = () => {
-    modal.close()
-    runGame()
-  }
+  // document.getElementById('dismiss').onclick = () => {modal.close()}
+  // document.getElementById('play-again').onclick = () => {
+  //   modal.close()
+  //   runGame()
+  // }
 }
 
 module.exports = {runGame}

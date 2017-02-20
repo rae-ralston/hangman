@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.blankletter {
+  min-height: 3px;
+  max-height: 3px;
+  max-width: 15px;
+  min-width: 15px;
+  background-color: black;
+}

@@ -1,13 +1,23 @@
 <div class="hero-head">
   <header class="nav">
-    <h1 class="title nav-logo">hangman</h1>
+    <h1 class="title nav-logo">HANGMAN</h1>
+    <p>you have 6 guesses to save a man's life... can you do it?</p>
   </header>
 </div>
-<div id="list">
-  <h1 class="list-title">Ok, let's get this shit done...</h1>
-  {{#each sortedItems}}
-    <div>H</div>
-  {{/each}}
+<div id="container">
+  <div id="gameplay">
+    <div id="gameplay-letters">
+      <div class="each-letter">
+        <div class="letter"></div>
+        <div class="blankletter-line"></div>
+      </div>
+    </div>
+    <div>Check Guess</div>
+  </div>
+  <div id="gameStatuse-sidebar">
+    <div id="score"></div>
+    <div id="badguesses"></div>
+  </div>
 </div>
 
 

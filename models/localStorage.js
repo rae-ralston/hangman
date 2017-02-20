@@ -17,6 +17,8 @@ const getSettings = name => {
 
 const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
 const getUniqueLetters = () => getSettings('uniqueLetters')
+const getGuessedLetters = () => getSettings('guessedLetters')
+const getCorrectGuessedLetters = () => getSettings('correctGuessedLetters')
 
 const incrementBadGuesses = () => {
   let incorrectGuesses = getIncorrectGuessCount();
@@ -24,10 +26,17 @@ const incrementBadGuesses = () => {
   saveSettings('incorrectGuessCount', incorrectGuesses)
 }
 
+const saveCorrectGuess = letter => {
+  let correctGuesses = getCorrectGuessedLetters()
+  correctGuesses += letter
+  saveSettings('correctGuessedLetters', correctGuesses)
+}
+
 module.exports = {
   getIncorrectGuessCount,
   getUniqueLetters,
   saveSettings, 
   getSettings, 
-  incrementBadGuesses
+  incrementBadGuesses,
+  saveCorrectGuess
 }

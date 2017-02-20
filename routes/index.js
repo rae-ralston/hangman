@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Game = require('../models/Game')
 const {
   newGameWord, 
   oneRandomWord, 
@@ -10,7 +9,7 @@ const {runGame} = require('../models/gameStatus')
 
 router.get('/', (request, response) => {
   let newWord = newGameWord()
-
+  console.log(newGameWord())
   response.render('index', {title:"hi", word: newWord})
 })
 
