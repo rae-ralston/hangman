@@ -1,19 +1,42 @@
 const express = require('express')
 const router = express.Router()
 const { 
+  newGameWord,
   oneRandomWord, 
   getSpecificLengthWord, 
   uniqueLetters,
-  displayHangmanWord
+  displayHangmanWord,
+  getRandomSadGif
 } = require('../models/words')
-const {getMyGameInfo, checkLocal} = require('../models/localStorage')
-const {runGame, checkGuess} = require('../models/gameStatus')
+const sadGifs = require('../models/sadGifs')
+const {getGameInfo, checkLocal, clear} = require('../models/localStorage')
+const {runGame, checkGuess, continueGame} = require('../models/gameStatus')
+
 
 router.get('/', (request, response) => {
+  clear()
   response.render('landing')
 })
 
 router.get('/newgame', (request, response) => {
+  const difficulty = 1  //val 1-10
+  const minWordLength = 5
+  let test = newGameWord(difficulty, minWordLength)
+  console.log('test', test)
+  getSpecificLengthWord(difficulty, minWordLength)
+    .then(words => oneRandomWord(words))
+    .then(word => {
+      return {word, uniqueLetters: uniqueLetters(word)}
+    })
+    .then(wordInfo => {
+      console.log('wordInfo', wordInfo)
+      runGame(wordInfo)
+      response.redirect('/play')
+    })
+    .catch(err => console.error(err))
+})
+
+router.get('/continueGame', (request, response) => {
   const difficulty = 1  //val 1-10
   const minWordLength = 5
 
@@ -23,31 +46,37 @@ router.get('/newgame', (request, response) => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
-      runGame(wordInfo)
+      continueGame(wordInfo)
       response.redirect('/play')
     })
     .catch(err => console.error(err))
 })
 
 router.get('/play', (request, response) => {
-  const gameInfo = getMyGameInfo()
-  console.log('game info: incorrect guesses', gameInfo.incorrectGuessedLetters)
+  const gameInfo = getGameInfo()
   let {
     correctGuessedLetters,
     currentWord,
     incorrectGuessCount,
-    incorrectGuessedLetters} = gameInfo
+    incorrectGuessedLetters, 
+    winStreak, 
+    lostGame} = gameInfo
   
-  console.log('game info', gameInfo)
+  let lostGIF = ""
+  lostGame = (lostGame === "true")
+  if(lostGame){
+    lostGIF = getRandomSadGif(sadGifs)
+  }
+
+  currentWord = currentWord.split('')
   if(incorrectGuessedLetters.length > 0) {
     incorrectGuessedLetters = incorrectGuessedLetters.split('')
   }
-  currentWord = currentWord.split('')
   let hangmanArray = displayHangmanWord(correctGuessedLetters, currentWord)
-  console.log('hangmanArray', hangmanArray)
-
-
   response.render('index', {
+    lostGIF,
+    lostGame,
+    winStreak,
     hangmanArray,
     correctGuessedLetters,
     currentWord,
@@ -57,13 +86,13 @@ router.get('/play', (request, response) => {
 })
 
 router.post('/checkAnswer', (request, response) => {
-  // get answer from body form
-  // 
   const {guess} = request.body
   console.log('got to check answer', guess)
-  checkGuess(guess)
-  
-  response.redirect('/play')
+  let winOrLose = checkGuess(guess)
+  console.log('won?', winOrLose)
+  // if(winOrLose === 'lost') {response.redirect('/')}
+  if(winOrLose === 'won') {response.redirect('/continueGame')}
+  else {response.redirect('/play')}
 })
 
 module.exports = router;

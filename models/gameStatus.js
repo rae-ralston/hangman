@@ -6,21 +6,40 @@ const {
   getIncorrectGuessCount,
   getUniqueLetters,
   saveSettings,
-  clear
+  getWinStreak,
+  getLostGame
 } = require('./localStorage')
 
 const runGame = wordInfo => {
-  clear()
   const incorrectGuesses = 0
   const {word, uniqueLetters} = wordInfo
   const guessedLetters = ""
   const correctGuessedLetters = ""
+  const winStreak = 0
+  const lostGame = "false"
 
   saveSettings('currentWord', word)
   saveSettings('uniqueLetters', uniqueLetters)
   saveSettings('incorrectGuessCount', incorrectGuesses)
   saveSettings('incorrectGuessedLetters', guessedLetters)
   saveSettings('correctGuessedLetters', correctGuessedLetters)
+  saveSettings('winStreak', winStreak)
+  saveSettings('lostGame', lostGame)
+}
+
+const continueGame = wordInfo => {
+  const incorrectGuesses = 0
+  const {word, uniqueLetters} = wordInfo
+  const guessedLetters = ""
+  const correctGuessedLetters = ""
+  const lostGame = "false"
+
+  saveSettings('currentWord', word)
+  saveSettings('uniqueLetters', uniqueLetters)
+  saveSettings('incorrectGuessCount', incorrectGuesses)
+  saveSettings('incorrectGuessedLetters', guessedLetters)
+  saveSettings('correctGuessedLetters', correctGuessedLetters)
+  saveSettings('lostGame', lostGame)
 }
 
 const checkGuess = guessLetter => {
@@ -28,10 +47,10 @@ const checkGuess = guessLetter => {
 
   if(uniqueLetters.includes(guessLetter)) {
     saveCorrectGuess(guessLetter)
-    checkForWin()
+    return checkForWin()
   } else {
-    incorrectGuess(guessLetter)
-    checkForLoss()
+    saveIncorrectGuess(guessLetter)
+    return checkForLoss()
   }
 }
 
@@ -42,39 +61,36 @@ const saveCorrectGuess = letter => {
   saveSettings('correctGuessedLetters', correctGuesses)
 }
 
-const incorrectGuess = letter => {
+const saveIncorrectGuess = letter => {
   let incorrectGuessCount = getIncorrectGuessCount();
   let incorrectGuesses = getIncorrectGuessedLetters();
 
   incorrectGuessCount += 1
   incorrectGuesses += letter
-  console.log('incorrect letters AFTER add', incorrectGuesses)
-
   saveSettings('incorrectGuessCount', incorrectGuessCount)
   saveSettings('incorrectGuessedLetters', incorrectGuesses)
-}
-
-const correctGuess = letter => {
-  let correctGuesses = getCorrectGuessedLetters()
-
-  correctGuesses += letter
-  saveSettings('correctGuessedLetters', correctGuesses)
 }
 
 const checkForWin = () => {
   let correctGuesses = getCorrectGuessedLetters()
   let uniqueLetters = getUniqueLetters()
+  let winStreak = getWinStreak()
 
-  if(correctGuesses.length === uniqueLetters) 
-    console.log("Congratualtions, you've saved a life today.")
-  return correctGuesses.length === uniqueLetters
+  if(correctGuesses.length === uniqueLetters.length) {
+    winStreak += 1
+    saveSettings('winStreak', winStreak)
+    return "won"
+  }
 }
 
 const checkForLoss = () => {
   let incorrectGuesses = getIncorrectGuessCount()
+  let lostGame = getLostGame()
 
-  if(incorrectGuesses >= 6)
-    console.log("Bummer, you lost the game.")
+  if(incorrectGuesses >= 6) {
+    lostGame = true
+    saveSettings('lostGame', lostGame)
+  }
 }
 
-module.exports = {runGame, checkGuess}
+module.exports = {runGame, checkGuess, continueGame}

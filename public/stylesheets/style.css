@@ -5,6 +5,11 @@ a {
   color: #00B7FF;
 }
 
+.hero-head p,
+.hero-head p:not(:last-child) {
+  margin-bottom: 2px;
+}
+
 
 
 /***********************************
@@ -21,8 +26,17 @@ GAME AREA STYLING
   flex-direction: row;
   margin: 20px;
 }
+
 .gameplay {
-  margin: 30px 20px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 20px 0px 20px;
+}
+
+.gameplay-letters {
+  margin-bottom: 20px;
 }
 
 .blank-letters {
@@ -39,6 +53,12 @@ GAME AREA STYLING
   background-color: black;
 }
 
+#hangman-guess-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .hangman-letters {
   margin: 3px;
   max-width: 15px;
@@ -47,6 +67,8 @@ GAME AREA STYLING
 }
 
 .gameStatus-sidebar {
+  display: flex;
+  flex-direction: column;
   margin: 0px 20px;
 }
 
@@ -58,4 +80,13 @@ GAME AREA STYLING
 .incorrectGuessedLetters {
   display: flex;
   flex-direction: row;
+}
+
+.incorrectletters {
+  font-size: 1.5em;
+  margin: 5px;
+}
+
+.modal-card-body img {
+  max-height: 300px;
 }

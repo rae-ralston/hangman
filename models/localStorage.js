@@ -15,15 +15,14 @@ const clear = () => {
   localStorage.clear()
 }
 
-const checkLocal = () => {
-  let word = getSettings('currentWord')
-  console.log('Check local: currentWrd',word)
-}
-
 const getSettings = name => {
-  if (name === 'currentWord' || name === 'uniqueLetters' || name === 'incorrectGuessedLetters' || name === 'correctGuessedLetters') 
+  if (name === 'currentWord' 
+    || name === 'uniqueLetters' 
+    || name === 'incorrectGuessedLetters' 
+    || name === 'correctGuessedLetters'
+    || name === 'lostGame') 
     return localStorage.getItem(name)
-  else if (name === 'incorrectGuessCount') 
+  else if (name === 'incorrectGuessCount' || name === 'winStreak') 
     return (parseInt(localStorage.getItem(name)))
   else {console.log('Error in getting setting ' + name)}
 }
@@ -33,9 +32,14 @@ const getCurrentWord = () => getSettings('getCurrentWord')
 const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
 const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getUniqueLetters = () => getSettings('uniqueLetters')
+const getWinStreak = () => parseInt(getSettings('winStreak'))
+const getLostGame = () => getSettings('lostGame')
 
-function getMyGameInfo() {
+function getGameInfo() {
+  console.log('typeof winsteak', getSettings('winStreak'), typeof parseInt(getSettings('winStreak')))
   return {
+    lostGame: getSettings('lostGame'),
+    winStreak: parseInt(getSettings('winStreak')),
     correctGuessedLetters: getSettings('correctGuessedLetters'),
     currentWord: getSettings('currentWord'),
     incorrectGuessCount: parseInt(getSettings('incorrectGuessCount')),
@@ -44,14 +48,15 @@ function getMyGameInfo() {
 }
 
 module.exports = {
-  checkLocal,
   clear,
   getCorrectGuessedLetters,
   getCurrentWord,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
-  getMyGameInfo,
+  getGameInfo,
   getUniqueLetters,
   getSettings, 
-  saveSettings, 
+  saveSettings,
+  getWinStreak,
+  getLostGame
 }

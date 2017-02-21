@@ -29,18 +29,6 @@ const oneRandomWord = words => {
   return words[wordIndex]
 }
 
-const newGameWord = () => {
-  const difficulty = 1  //val 1-10
-  const minWordLength = 5
-
-  getSpecificLengthWord(difficulty, minWordLength)
-    .then(words => oneRandomWord(words))
-    .then(word => {
-      return {word, uniqueLetters: uniqueLetters(word)}
-    })
-    .catch(err => console.error(err))
-}
-
 const uniqueLetters = word => {
   let uniqueLetters = ""
   for(let i = 0; i < word.length; i++) {
@@ -52,8 +40,6 @@ const uniqueLetters = word => {
 const displayHangmanWord = (correctGuessedLetters, currentWord) => {
   let hangmanDisplay
   if(correctGuessedLetters.length > 0) {
-    console.log('inside if')
-    // correctGuessedLetters = correctGuessedLetters.split('')
     hangmanDisplay = currentWord.reduce((hangmanArray, letter) => {
       correctGuessedLetters.includes(letter) 
         ? hangmanArray.push(letter) 
@@ -66,13 +52,18 @@ const displayHangmanWord = (correctGuessedLetters, currentWord) => {
   return hangmanDisplay
 }
 
+const getRandomSadGif = gifArray => {
+  const i = getRandomInt(0, gifArray.length)
+  return gifArray[i]
+}
+
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)
 
 module.exports = {
-  newGameWord, 
   oneRandomWord, 
   getSpecificLengthWord, 
   uniqueLetters,
-  displayHangmanWord
+  displayHangmanWord,
+  getRandomSadGif
 }
