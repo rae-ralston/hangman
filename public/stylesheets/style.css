@@ -1,16 +1,54 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
+/***********************************
+GENERAL STYLING
+***********************************/
 a {
   color: #00B7FF;
 }
 
-.blankletter {
+
+
+/***********************************
+GAME AREA STYLING
+***********************************/
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+.gameplay {
+  margin: 30px 20px 0px 20px;
+}
+
+.blank-letters {
+  display: flex;
+  flex-direction: row;
+}
+
+.blankletter-lines {
   min-height: 3px;
   max-height: 3px;
   max-width: 15px;
   min-width: 15px;
+  margin:3px;
   background-color: black;
+}
+
+.gameStatus-sidebar {
+  margin: 0px 20px;
+}
+
+.incorrectGuessCount {
+  font-size: 4em;
+  margin: 0px;
+}
+
+.incorrectGuessedLetters {
+  display: flex;
+  flex-direction: row;
 }

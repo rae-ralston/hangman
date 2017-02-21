@@ -1,24 +1,47 @@
-<div class="hero-head">
-  <header class="nav">
-    <h1 class="title nav-logo">HANGMAN</h1>
+<div class="content">
+  <div class="hero-head">
+    <h1>HANGMAN</h1>
     <p>you have 6 guesses to save a man's life... can you do it?</p>
-  </header>
-</div>
-<div id="container">
-  <div id="gameplay">
-    <div id="gameplay-letters">
-      <div class="each-letter">
-        {{currentWord}}
-        <div class="letter"></div>
-        <div class="blankletter-line"></div>
+  </div>
+  <div class="game">
+    <div class="gameplay">
+      <div class="gameplay-letters">
+        <div class="each-letter">
+          <div class="letter"></div>
+          <div class="blank-letters"> 
+            {{#each currentWord}}
+            <div class="blankletter-lines"></div>
+            {{/each}}
+          </div>
+          <div class="blank-letters"> 
+            {{#each currentWord}}
+            <div class="blankletter-lines"></div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      <div class="box home-box">
+      <div id="game-guess-form" class="control">
+        <form id="hangman-guess" method="post" action="/checkAnswer">
+          <input class="input submission-form" name="guess" placeholder="Guess a Letter" type="text"> </input>
+          <input id="check-btn" type="submit" value="Check Guess" class="button is-primary">
+          </input>
+        </form>
       </div>
     </div>
-    <div>Check Guess</div>
+    </div>
+    <div class="gameStatus-sidebar">
+      <div class="incorrectGuessCount">{{incorrectGuessCount}}</div>
+      <div class="incorrectGuessedLetters">
+        {{#each incorrectGuessedLetters}}
+        <div class="incorrectletters">{{this}}</div>
+        {{/each}}
+      <div>
+    </div>
   </div>
-  <div id="gameStatuse-sidebar">
-    <div id="score"></div>
-    <div id="badguesses"></div>
-  </div>
+  <div>currentWord: {{currentWord}}</div>
+  <div>correct guessed letters: {{correctGuessedLetters}}</div>
+  <div>incorrect guessed letters: {{incorrectGuessedLetters}}</div>
 </div>
 
 

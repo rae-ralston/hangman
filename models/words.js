@@ -48,7 +48,30 @@ const uniqueLetters = word => {
   return uniqueLetters
 }
 
+const displayHangmanWord = (correctGuessedLetters, currentWord) => {
+  let hangmanDisplay
+  if(correctGuessedLetters.length > 0) {
+    console.log('inside if')
+    // correctGuessedLetters = correctGuessedLetters.split('')
+    hangmanDisplay = currentWord.reduce((hangmanArray, letter) => {
+      correctGuessedLetters.includes(letter) 
+        ? hangmanArray.push(letter) 
+        : hangmanArray.push(" ")
+      return hangmanArray
+    }, [])
+    return hangmanDisplay
+  }
+  hangmanDisplay = []
+  return hangmanDisplay
+}
+
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)
 
-module.exports = {newGameWord, oneRandomWord, getSpecificLengthWord, uniqueLetters}
+module.exports = {
+  newGameWord, 
+  oneRandomWord, 
+  getSpecificLengthWord, 
+  uniqueLetters,
+  displayHangmanWord
+}

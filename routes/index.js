@@ -3,10 +3,11 @@ const router = express.Router()
 const { 
   oneRandomWord, 
   getSpecificLengthWord, 
-  uniqueLetters
+  uniqueLetters,
+  displayHangmanWord
 } = require('../models/words')
 const {getMyGameInfo, checkLocal} = require('../models/localStorage')
-const {runGame} = require('../models/gameStatus')
+const {runGame, checkGuess} = require('../models/gameStatus')
 
 router.get('/', (request, response) => {
   response.render('landing')
@@ -23,32 +24,43 @@ router.get('/newgame', (request, response) => {
     })
     .then(wordInfo => {
       runGame(wordInfo)
-      checkLocal()
       response.redirect('/play')
     })
     .catch(err => console.error(err))
 })
 
 router.get('/play', (request, response) => {
-  // game is saved in local
-  // now game logic
-  let gameInfo = getMyGameInfo()
+  const gameInfo = getMyGameInfo()
+  console.log('game info: incorrect guesses', gameInfo.incorrectGuessedLetters)
   let {
     correctGuessedLetters,
     currentWord,
     incorrectGuessCount,
-    incorrectGuesses} = gameInfo
-  response.render('index', {
-    correctGuessedLetters,
-    currentWord,
-    incorrectGuessCount,
-    incorrectGuesses
-  })
+    incorrectGuessedLetters} = gameInfo
+  
+  console.log('game info', gameInfo)
+  if(incorrectGuessedLetters.length > 0) {
+    incorrectGuessedLetters = incorrectGuessedLetters.split('')
+  }
+  console.log('before reduce')
+  currentWord = currentWord.split('')
+  displayHangmanWord(correctGuessedLetters, currentWord)
+    .then(hangmanDisplay => response.render('index', {
+        hangmanArray: hangmanDisplay,
+        correctGuessedLetters,
+        currentWord,
+        incorrectGuessCount,
+        incorrectGuessedLetters
+      })
+    )
 })
 
-router.get('/checkAnswer', (request, response) => {
+router.post('/checkAnswer', (request, response) => {
   // get answer from body form
   // 
+  const {guess} = request.body
+  console.log('got to check answer', guess)
+  checkGuess(guess)
   
   response.redirect('/play')
 })

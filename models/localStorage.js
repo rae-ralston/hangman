@@ -11,6 +11,10 @@ const saveSettings = (name, settings) => {
     : console.log('Error in saving state of ' + saveName + ': ' + saveSettings);
 }
 
+const clear = () => {
+  localStorage.clear()
+}
+
 const checkLocal = () => {
   let word = getSettings('currentWord')
   console.log('Check local: currentWrd',word)
@@ -31,26 +35,23 @@ const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getUniqueLetters = () => getSettings('uniqueLetters')
 
 function getMyGameInfo() {
-  // console.log('inget game info')
-  let gameInfo = {
+  return {
     correctGuessedLetters: getSettings('correctGuessedLetters'),
     currentWord: getSettings('currentWord'),
-    incorrectGuessCount: getIncorrectGuessCount(),
-    incorrectGuessedLetters: getIncorrectGuessedLetters()
+    incorrectGuessCount: parseInt(getSettings('incorrectGuessCount')),
+    incorrectGuessedLetters: getSettings('incorrectGuessedLetters')
   }
-  console.log('after gminfo define')
-
-  return gameInfo
 }
 
 module.exports = {
+  checkLocal,
+  clear,
   getCorrectGuessedLetters,
   getCurrentWord,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
   getMyGameInfo,
   getUniqueLetters,
-  saveSettings, 
   getSettings, 
-  checkLocal
+  saveSettings, 
 }

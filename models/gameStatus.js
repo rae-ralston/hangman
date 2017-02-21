@@ -2,10 +2,11 @@ const {newGameWord} = require('./words')
 const {
   getCorrectGuessedLetters,
   getCurrentWord,
-  getGuessedLetters,
+  getIncorrectGuessedLetters,
   getIncorrectGuessCount,
   getUniqueLetters,
-  saveSettings
+  saveSettings,
+  clear
 } = require('./localStorage')
 
 const runGame = wordInfo => {
@@ -29,7 +30,7 @@ const checkGuess = guessLetter => {
     saveCorrectGuess(guessLetter)
     checkForWin()
   } else {
-    incorrectGuess(guessedLetter)
+    incorrectGuess(guessLetter)
     checkForLoss()
   }
 }
@@ -43,12 +44,14 @@ const saveCorrectGuess = letter => {
 
 const incorrectGuess = letter => {
   let incorrectGuessCount = getIncorrectGuessCount();
-  let incorrectGuesses = getGuessedLetters();
+  let incorrectGuesses = getIncorrectGuessedLetters();
 
   incorrectGuessCount += 1
   incorrectGuesses += letter
+  console.log('incorrect letters AFTER add', incorrectGuesses)
+
   saveSettings('incorrectGuessCount', incorrectGuessCount)
-  saveSettings('guessedLetters', incorrectGuesses)
+  saveSettings('incorrectGuessedLetters', incorrectGuesses)
 }
 
 const correctGuess = letter => {
@@ -74,4 +77,4 @@ const checkForLoss = () => {
     console.log("Bummer, you lost the game.")
 }
 
-module.exports = {runGame}
+module.exports = {runGame, checkGuess}
