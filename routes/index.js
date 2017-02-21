@@ -42,17 +42,18 @@ router.get('/play', (request, response) => {
   if(incorrectGuessedLetters.length > 0) {
     incorrectGuessedLetters = incorrectGuessedLetters.split('')
   }
-  console.log('before reduce')
   currentWord = currentWord.split('')
-  displayHangmanWord(correctGuessedLetters, currentWord)
-    .then(hangmanDisplay => response.render('index', {
-        hangmanArray: hangmanDisplay,
-        correctGuessedLetters,
-        currentWord,
-        incorrectGuessCount,
-        incorrectGuessedLetters
-      })
-    )
+  let hangmanArray = displayHangmanWord(correctGuessedLetters, currentWord)
+  console.log('hangmanArray', hangmanArray)
+
+
+  response.render('index', {
+    hangmanArray,
+    correctGuessedLetters,
+    currentWord,
+    incorrectGuessCount,
+    incorrectGuessedLetters
+  })
 })
 
 router.post('/checkAnswer', (request, response) => {

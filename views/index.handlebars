@@ -9,8 +9,8 @@
         <div class="each-letter">
           <div class="letter"></div>
           <div class="blank-letters"> 
-            {{#each currentWord}}
-            <div class="blankletter-lines"></div>
+            {{#each hangmanArray}}
+            <div class="hangman-letters">{{this}}</div>
             {{/each}}
           </div>
           <div class="blank-letters"> 

@@ -1,5 +1,6 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+// require('promise');
 // TODO: if time- try https://github.com/github/fetch && do I really need isomorphic
 const {
   getIncorrectGuessCount, 
