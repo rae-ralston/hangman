@@ -1,0 +1,58 @@
+<section class="hero is-primary is-fullheight is-bold">
+  <div class="hero-body">
+    <div class="container splash-center-div">
+      <h1 id="splash-logo"class="splash-logo title">HANGMAN</h1>
+      <div class="container newgame-container">
+        <div class="hung-man-div">
+          {{#each hungMan}}
+            <p class="hung-man">{{this}}</p>
+          {{/each}}
+        </div>
+        <div class="form-container" class="control">
+          <div class="new-game-form-container" >
+            <form class="new-game-form" method="post" action="/newgame">
+              <div>
+                <label class="label">Choose Dificulty</label>
+                <p class="control">
+                  <span class="select-difficulty">
+                    <select name="selectDifficulty">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </span>
+                </p>
+              </div>
+              <div>
+                <label class="label">Choose Word Length</label>
+                <p class="control">
+                  <span class="select-word-length">
+                    <select name="selectWordLength">
+                      <option value="Surprise Me">Surprise Me</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <optio value="10"n>10</option>
+                    </select>
+                  </span>
+                </p>
+              </div>
+              <input id="new-game-btn" type="submit" value="play new game" class="button is-large">
+              </input>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section
