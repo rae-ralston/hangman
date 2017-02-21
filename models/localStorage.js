@@ -1,5 +1,5 @@
 const {LocalStorage} = require('node-localstorage')
-localStorage = new LocalStorage('./scratch');
+localStorage = new LocalStorage('./localMemory');
 
 const saveSettings = (name, settings) => {
   const saveName = name.toString();
