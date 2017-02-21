@@ -57,6 +57,10 @@ const getRandomSadGif = gifArray => {
   return gifArray[i]
 }
 
+const getRandomLevel = () => {
+  return getRandomInt(1, 10)
+}
+
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -65,5 +69,6 @@ module.exports = {
   getSpecificLengthWord, 
   uniqueLetters,
   displayHangmanWord,
-  getRandomSadGif
+  getRandomSadGif,
+  getRandomLevel
 }

@@ -5,7 +5,13 @@
     <p>You've won {{winStreak}} games in a row.</p>
   </div>
   <div class="game">
-    <div class="gameplay box home-box"">
+    <div class="hung-man-div">
+      {{#each hungMan}}
+        <p class="hung-man">{{this}}</p>
+      {{/each}}
+    </div>
+    <div class="gameplay box home-box">
+    
       <div class="gameplay-letters">
         <div class="each-letter">
           <div class="blank-letters"> 
@@ -20,13 +26,16 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="form-container">
         <div id="game-guess-form" class="control">
           <form id="hangman-guess-form" method="post" action="/checkAnswer">
             <input class="input submission-form" name="guess" placeholder="Guess a Letter" type="text"> </input>
             <input id="check-btn" type="submit" value="Check Guess" class="button is-primary">
             </input>
           </form>
+          <div class="submission-warning">
+            <p class="is-small">{{submissionWarning}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +49,7 @@
       </div>
     </div>
   </div>
+  <div>DEVELOPMENT HELPERS</div>
   <div>currentWord: {{currentWord}}</div>
   <div>correct guessed letters: {{correctGuessedLetters}}</div>
   <div>incorrect guessed letters: {{incorrectGuessedLetters}}</div>

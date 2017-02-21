@@ -20,7 +20,8 @@ const getSettings = name => {
     || name === 'uniqueLetters' 
     || name === 'incorrectGuessedLetters' 
     || name === 'correctGuessedLetters'
-    || name === 'lostGame') 
+    || name === 'lostGame'
+    || name === 'submissionWarning') 
     return localStorage.getItem(name)
   else if (name === 'incorrectGuessCount' || name === 'winStreak') 
     return (parseInt(localStorage.getItem(name)))
@@ -34,10 +35,11 @@ const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getUniqueLetters = () => getSettings('uniqueLetters')
 const getWinStreak = () => parseInt(getSettings('winStreak'))
 const getLostGame = () => getSettings('lostGame')
+const getSubmissionWarning = () => getSettings('submissionWarning')
 
-function getGameInfo() {
-  console.log('typeof winsteak', getSettings('winStreak'), typeof parseInt(getSettings('winStreak')))
+let getGameInfo = () => {
   return {
+    submissionWarning: getSettings('submissionWarning'),
     lostGame: getSettings('lostGame'),
     winStreak: parseInt(getSettings('winStreak')),
     correctGuessedLetters: getSettings('correctGuessedLetters'),
@@ -58,5 +60,6 @@ module.exports = {
   getSettings, 
   saveSettings,
   getWinStreak,
-  getLostGame
+  getLostGame,
+  getSubmissionWarning
 }

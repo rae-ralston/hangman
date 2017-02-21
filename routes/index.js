@@ -1,35 +1,37 @@
 const express = require('express')
 const router = express.Router()
 const { 
-  newGameWord,
   oneRandomWord, 
   getSpecificLengthWord, 
   uniqueLetters,
   displayHangmanWord,
-  getRandomSadGif
+  getRandomSadGif,
+  getRandomLevel
 } = require('../models/words')
 const sadGifs = require('../models/sadGifs')
 const {getGameInfo, checkLocal, clear} = require('../models/localStorage')
 const {runGame, checkGuess, continueGame} = require('../models/gameStatus')
+const {hungMan} = require('../models/hangman')
 
 
 router.get('/', (request, response) => {
   clear()
-  response.render('landing')
+  console.log('hung man', hungMan)
+  response.render('landing', {hungMan:hungMan.whole})
 })
 
-router.get('/newgame', (request, response) => {
-  const difficulty = 1  //val 1-10
-  const minWordLength = 5
-  let test = newGameWord(difficulty, minWordLength)
-  console.log('test', test)
+router.post('/newgame', (request, response) => {
+  const difficulty = request.body.selectDifficulty
+  let minWordLength = request.body.selectWordLength
+
+  if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
+
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
-      console.log('wordInfo', wordInfo)
       runGame(wordInfo)
       response.redirect('/play')
     })
@@ -60,7 +62,8 @@ router.get('/play', (request, response) => {
     incorrectGuessCount,
     incorrectGuessedLetters, 
     winStreak, 
-    lostGame} = gameInfo
+    lostGame, 
+    submissionWarning} = gameInfo
   
   let lostGIF = ""
   lostGame = (lostGame === "true")
@@ -73,7 +76,10 @@ router.get('/play', (request, response) => {
     incorrectGuessedLetters = incorrectGuessedLetters.split('')
   }
   let hangmanArray = displayHangmanWord(correctGuessedLetters, currentWord)
+  
   response.render('index', {
+    hungMan:hungMan[incorrectGuessCount],
+    submissionWarning,
     lostGIF,
     lostGame,
     winStreak,
@@ -87,10 +93,8 @@ router.get('/play', (request, response) => {
 
 router.post('/checkAnswer', (request, response) => {
   const {guess} = request.body
-  console.log('got to check answer', guess)
-  let winOrLose = checkGuess(guess)
-  console.log('won?', winOrLose)
-  // if(winOrLose === 'lost') {response.redirect('/')}
+  const winOrLose = checkGuess(guess)
+
   if(winOrLose === 'won') {response.redirect('/continueGame')}
   else {response.redirect('/play')}
 })

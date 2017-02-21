@@ -7,7 +7,8 @@ const {
   getUniqueLetters,
   saveSettings,
   getWinStreak,
-  getLostGame
+  getLostGame,
+  getSubmissionWarning
 } = require('./localStorage')
 
 const runGame = wordInfo => {
@@ -17,6 +18,7 @@ const runGame = wordInfo => {
   const correctGuessedLetters = ""
   const winStreak = 0
   const lostGame = "false"
+  const submissionWarning = ""
 
   saveSettings('currentWord', word)
   saveSettings('uniqueLetters', uniqueLetters)
@@ -25,6 +27,7 @@ const runGame = wordInfo => {
   saveSettings('correctGuessedLetters', correctGuessedLetters)
   saveSettings('winStreak', winStreak)
   saveSettings('lostGame', lostGame)
+  saveSettings('submissionWarning', submissionWarning)
 }
 
 const continueGame = wordInfo => {
@@ -33,6 +36,7 @@ const continueGame = wordInfo => {
   const guessedLetters = ""
   const correctGuessedLetters = ""
   const lostGame = "false"
+  const submissionWarning = ""
 
   saveSettings('currentWord', word)
   saveSettings('uniqueLetters', uniqueLetters)
@@ -56,24 +60,38 @@ const checkGuess = guessLetter => {
 
 const saveCorrectGuess = letter => {
   let correctGuesses = getCorrectGuessedLetters()
-
-  correctGuesses += letter
-  saveSettings('correctGuessedLetters', correctGuesses)
+  let submissionWarning = getSubmissionWarning()
+  if(correctGuesses.includes(letter)) {
+    submissionWarning = "You got that one already.\nPick another letter, awesome human!"
+    saveSettings('submissionWarning', submissionWarning)
+  } else {
+    correctGuesses += letter
+    submissionWarning = ""
+    saveSettings('correctGuessedLetters', correctGuesses)
+    saveSettings('submissionWarning', submissionWarning)
+  }
 }
 
 const saveIncorrectGuess = letter => {
-  let incorrectGuessCount = getIncorrectGuessCount();
-  let incorrectGuesses = getIncorrectGuessedLetters();
-
-  incorrectGuessCount += 1
-  incorrectGuesses += letter
-  saveSettings('incorrectGuessCount', incorrectGuessCount)
-  saveSettings('incorrectGuessedLetters', incorrectGuesses)
+  let incorrectGuessCount = getIncorrectGuessCount()
+  let incorrectGuesses = getIncorrectGuessedLetters()
+  let submissionWarning = getSubmissionWarning()
+  if(incorrectGuesses.includes(letter)) {
+    submissionWarning = "You've already tried that letter.\nTry a different one."
+    saveSettings('submissionWarning', submissionWarning)
+  } else {
+    incorrectGuessCount += 1
+    incorrectGuesses += letter
+    submissionWarning = ""
+    saveSettings('incorrectGuessCount', incorrectGuessCount)
+    saveSettings('incorrectGuessedLetters', incorrectGuesses)
+    saveSettings('submissionWarning', submissionWarning)
+  }
 }
 
 const checkForWin = () => {
-  let correctGuesses = getCorrectGuessedLetters()
-  let uniqueLetters = getUniqueLetters()
+  const correctGuesses = getCorrectGuessedLetters()
+  const uniqueLetters = getUniqueLetters()
   let winStreak = getWinStreak()
 
   if(correctGuesses.length === uniqueLetters.length) {
