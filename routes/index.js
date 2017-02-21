@@ -9,38 +9,43 @@ const {
   getRandomLevel
 } = require('../models/words')
 const sadGifs = require('../models/sadGifs')
-const {getGameInfo, checkLocal, clear} = require('../models/localStorage')
-const {runGame, checkGuess, continueGame} = require('../models/gameStatus')
+const {
+  getGameInfo, 
+  checkLocal, 
+  clear, 
+  saveGameDifficultySettings,
+  getGameDifficultySettings
+} = require('../models/localStorage')
+const {newGame, checkGuess, continueGame} = require('../models/gameStatus')
 const {hungMan} = require('../models/hangman')
 
 
 router.get('/', (request, response) => {
   clear()
-  console.log('hung man', hungMan)
   response.render('landing', {hungMan:hungMan.whole})
 })
 
-router.post('/newgame', (request, response) => {
+router.all('/newgame', (request, response) => {
   const difficulty = request.body.selectDifficulty
   let minWordLength = request.body.selectWordLength
 
   if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
 
+  saveGameDifficultySettings({difficulty, minWordLength})
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
-      runGame(wordInfo)
+      newGame(wordInfo)
       response.redirect('/play')
     })
     .catch(err => console.error(err))
 })
 
 router.get('/continueGame', (request, response) => {
-  const difficulty = 1  //val 1-10
-  const minWordLength = 5
+  let {difficulty, minWordLength} = getGameDifficultySettings()
 
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))

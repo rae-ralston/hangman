@@ -1,7 +1,5 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
-// require('promise');
-// TODO: if time- try https://github.com/github/fetch && do I really need isomorphic
 const {
   getIncorrectGuessCount, 
   getUniqueLetters, 
@@ -57,9 +55,7 @@ const getRandomSadGif = gifArray => {
   return gifArray[i]
 }
 
-const getRandomLevel = () => {
-  return getRandomInt(1, 10)
-}
+const getRandomLevel = () => getRandomInt(1, 10)
 
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)

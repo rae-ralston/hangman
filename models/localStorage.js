@@ -8,12 +8,10 @@ const saveSettings = (name, settings) => {
 
   (typeof(saveName) === 'string' && typeof(saveSettings) === 'string')
     ? localStorage.setItem(saveName, saveSettings)
-    : console.log('Error in saving state of ' + saveName + ': ' + saveSettings);
+    : console.log('Error in saving state of ' + saveName + ': ' + saveSettings)
 }
 
-const clear = () => {
-  localStorage.clear()
-}
+const clear = () => localStorage.clear()
 
 const getSettings = name => {
   if (name === 'currentWord' 
@@ -21,7 +19,8 @@ const getSettings = name => {
     || name === 'incorrectGuessedLetters' 
     || name === 'correctGuessedLetters'
     || name === 'lostGame'
-    || name === 'submissionWarning') 
+    || name === 'submissionWarning'
+    || name === 'gameDifficultySettings') 
     return localStorage.getItem(name)
   else if (name === 'incorrectGuessCount' || name === 'winStreak') 
     return (parseInt(localStorage.getItem(name)))
@@ -36,9 +35,16 @@ const getUniqueLetters = () => getSettings('uniqueLetters')
 const getWinStreak = () => parseInt(getSettings('winStreak'))
 const getLostGame = () => getSettings('lostGame')
 const getSubmissionWarning = () => getSettings('submissionWarning')
+const getGameDifficultySettings = () => getSettings('gameDifficultySettings')
+
+const saveGameDifficultySettings = settingsObject => {
+  console.log('settings Object', settingsObject)
+  saveSettings('gameDifficultySettings', settingsObject)
+}
 
 let getGameInfo = () => {
   return {
+    gameDifficultySettings:getSettings('gameDifficultySettings'),
     submissionWarning: getSettings('submissionWarning'),
     lostGame: getSettings('lostGame'),
     winStreak: parseInt(getSettings('winStreak')),
@@ -61,5 +67,7 @@ module.exports = {
   saveSettings,
   getWinStreak,
   getLostGame,
-  getSubmissionWarning
+  getSubmissionWarning,
+  saveGameDifficultySettings,
+  getGameDifficultySettings
 }
