@@ -1,7 +1,7 @@
 const {LocalStorage} = require('node-localstorage')
 const localStorage = new LocalStorage('./localMemory');
 
-const saveSettings = (name, settings) => {
+let saveSettings = (name, settings) => {
   const saveName = name.toString();
   const saveSettings = settings.toString();
   console.log('setting storage for', name, ' : ', settings);
@@ -64,6 +64,7 @@ module.exports = {
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
   getLostGame,
+  getSettings,
   getSubmissionWarning,
   getUniqueLetters,
   getWinStreak,

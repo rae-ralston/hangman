@@ -5,9 +5,10 @@ const {
   getSettings,
 } = require('../models/localStorage')
 
-describe.only('saveSettings() & getSettings()', () => {
+describe('saveSettings() & getSettings()', () => {
 
-  it('should be a function', () => {
+
+  it('save & get settings are functions', () => {
     expect(saveSettings).to.be.a('function')
     expect(getSettings).to.be.a('function')
   })
@@ -15,7 +16,7 @@ describe.only('saveSettings() & getSettings()', () => {
   saveSettings('currentWord', 'bannana')
 
   it('should save a word', () => {
-    expect(getSettings()).to.be('bannana')
+    expect(getSettings('currentWord')).to.equal('bannana')
   })
 })
 
