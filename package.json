@@ -2,6 +2,7 @@
   "name": "hangman",
   "version": "0.0.0",
   "private": true,
+  "description": "An simple full stack hangman game with express, handlebars & chai/mocha.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rachel-ftw/hangman.git"

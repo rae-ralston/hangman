@@ -7,6 +7,7 @@ rachel@rachelralston.com  |  website  |  linkedin  |  twitter
 2. install dependancies with `npm install`
 3. run with `npm start`
 4. visit `localhost:3000` to play the game
+5. run tests with `npm test`
 
 ## Parameters
 
