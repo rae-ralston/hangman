@@ -19,8 +19,7 @@ const getSettings = name => {
     || name === 'incorrectGuessedLetters' 
     || name === 'correctGuessedLetters'
     || name === 'lostGame'
-    || name === 'submissionWarning'
-    || name === 'gameDifficultySettings') 
+    || name === 'submissionWarning') 
     return localStorage.getItem(name)
   else if (name === 'incorrectGuessCount' 
     || name === 'winStreak'
@@ -33,7 +32,6 @@ const getSettings = name => {
 const getCorrectGuessedLetters = () => getSettings('correctGuessedLetters')
 const getCurrentWord = () => getSettings('currentWord')
 const getDifficulty = () => getSettings('difficulty')
-const getGameDifficultySettings = () => getSettings('gameDifficultySettings')
 const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
 const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getLostGame = () => getSettings('lostGame')
@@ -64,11 +62,12 @@ module.exports = {
   clear,
   getCorrectGuessedLetters,
   getCurrentWord,
-  getGameDifficultySettings,
+  getDifficulty,
   getGameInfo,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
   getLostGame,
+  getMinWordLength,
   getSettings,
   getSubmissionWarning,
   getUniqueLetters,

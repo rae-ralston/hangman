@@ -40,25 +40,6 @@ describe('clear(): ', () => {
   })
 })
 
-describe('the getting functions get the appropriate data: ', () => {
-  it('they\'re all functions', () => {
-    expect(getGameDifficultySettings).to.be.a('function')
-    expect(getGameInfo).to.be.a('function')
-    expect(getIncorrectGuessCount).to.be.a('function')
-    expect(getIncorrectGuessedLetters).to.be.a('function')
-    expect(getLostGame).to.be.a('function')
-    expect(getSettings).to.be.a('function')
-    expect(getSubmissionWarning).to.be.a('function')
-    expect(getUniqueLetters).to.be.a('function')
-    expect(getWinStreak).to.be.a('function')
-  })
-
-  it('getCorrectGuessedLetters() gets the correct guessed letters', () => {
-    saveSettings('correctGuessedLetters', 'abc')
-    expect(getCorrectGuessedLetters()).to.equal('abc')
-  })
-})
-
 describe('getCorrectGuessedLetters(): ', () => {
   it('is a functions', () => {
     expect(getCorrectGuessedLetters).to.be.a('function')
@@ -81,18 +62,18 @@ describe('getCurrentWord(): ', () => {
   })
 })
 
-describe('getGameDifficultySettings(): ', () => {
-  it('is a functions', () => {
-    expect(getGameDifficultySettings).to.be.a('function')
-  })
+// describe('getGameDifficultySettings(): ', () => {
+//   it('is a functions', () => {
+//     expect(getGameDifficultySettings).to.be.a('function')
+//   })
 
-  it('gets game\'s diffiuclty setting', () => {
-    let difficultySettings = {difficulty: 3, minWordLength: 5}
-    saveGameDifficultySettings(difficultySettings)
-    let settings = getGameDifficultySettings()
-    console.dir('!!!!!!!',settings)
-    expect(getGameDifficultySettings()).to.be.a('object')
-    expect(settings.difficulty).to.equal(3)
-    expect(settings.minWordLength).to.equal(5)
-  })
-})
+//   it('gets game\'s diffiuclty setting', () => {
+//     let difficultySettings = {difficulty: 3, minWordLength: 5}
+//     saveGameDifficultySettings(difficultySettings)
+//     let settings = getGameDifficultySettings()
+//     console.dir('!!!!!!!',settings)
+//     expect(getGameDifficultySettings()).to.be.a('object')
+//     expect(settings.difficulty).to.equal(3)
+//     expect(settings.minWordLength).to.equal(5)
+//   })
+// })
