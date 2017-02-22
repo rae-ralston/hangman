@@ -8,7 +8,6 @@ const {
 
 describe('saveSettings() & getSettings(): ', () => {
   
-  saveSettings('currentWord', 'bannana')
 
   it('are functions', () => {
     expect(saveSettings).to.be.a('function')
@@ -16,6 +15,7 @@ describe('saveSettings() & getSettings(): ', () => {
   })
 
   it('should save a word & get it back from localstorage', () => {
+    saveSettings('currentWord', 'bannana')
     expect(getSettings('currentWord')).to.equal('bannana')
   })
 })

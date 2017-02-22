@@ -7,14 +7,14 @@ const {
 
 describe('clear()', () => {
 
-  saveSettings('currentWord', 'bannana')
-  clear()
 
   it('is a function', () => {
     expect(clear).to.be.a('function')
   })
 
   it('returns null', () => {
+    saveSettings('currentWord', 'bannana')
+    clear()
     expect(getSettings('currentWord')).to.equal(null)
   })
 })
