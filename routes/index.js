@@ -1,24 +1,23 @@
 const express = require('express')
 const router = express.Router()
+
 const { 
-  oneRandomWord, 
-  getSpecificLengthWord, 
-  uniqueLetters,
   displayHangmanWord,
+  getRandomLevel,
   getRandomSadGif,
-  getRandomLevel
+  getSpecificLengthWord, 
+  oneRandomWord, 
+  uniqueLetters,
 } = require('../models/words')
-const sadGifs = require('../models/sadGifs')
 const {
-  getGameInfo, 
-  checkLocal, 
   clear, 
+  getGameDifficultySettings,
+  getGameInfo,  
   saveGameDifficultySettings,
-  getGameDifficultySettings
 } = require('../models/localStorage')
 const {newGame, checkGuess, continueGame} = require('../models/gameStatus')
 const {hungMan} = require('../models/hangman')
-
+const sadGifs = require('../models/sadGifs')
 
 router.get('/', (request, response) => {
   clear()
@@ -46,7 +45,8 @@ router.all('/newgame', (request, response) => {
 
 router.get('/continueGame', (request, response) => {
   let {difficulty, minWordLength} = getGameDifficultySettings()
-
+  difficulty = 1
+  minWordLength = 5
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
@@ -69,8 +69,8 @@ router.get('/play', (request, response) => {
     winStreak, 
     lostGame, 
     submissionWarning} = gameInfo
-  
   let lostGIF = ""
+  
   lostGame = (lostGame === "true")
   if(lostGame){
     lostGIF = getRandomSadGif(sadGifs)

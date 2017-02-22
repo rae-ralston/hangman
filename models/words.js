@@ -1,11 +1,5 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
-const {
-  getIncorrectGuessCount, 
-  getUniqueLetters, 
-  saveSettings,
-  saveCorrectGuess
-} = require('./localStorage')
 
 const getAnyNewWord = () => {
   const library = 'http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words'

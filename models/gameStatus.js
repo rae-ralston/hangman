@@ -1,50 +1,49 @@
 const {
   getCorrectGuessedLetters,
-  getIncorrectGuessedLetters,
   getIncorrectGuessCount,
-  getUniqueLetters,
-  saveSettings,
-  getWinStreak,
+  getIncorrectGuessedLetters,
   getLostGame,
   getSubmissionWarning,
-  getGameDifficultySettings
+  getUniqueLetters,
+  getWinStreak,
+  saveSettings,
 } = require('./localStorage')
 
 const newGame = wordInfo => {
-  const incorrectGuesses = 0
-  const {word, uniqueLetters} = wordInfo
-  const guessedLetters = ""
   const correctGuessedLetters = ""
-  const winStreak = 0
+  const gameDifficultySettings = {difficulty: 1, minWordLength: 3}
+  const guessedLetters = ""
+  const incorrectGuesses = 0
   const lostGame = "false"
   const submissionWarning = ""
-  const gameDifficultySettings = {difficulty: 1, minWordLength: 3}
+  const winStreak = 0
+  const {word, uniqueLetters} = wordInfo
 
+  saveSettings('correctGuessedLetters', correctGuessedLetters)
   saveSettings('currentWord', word)
-  saveSettings('uniqueLetters', uniqueLetters)
+  saveSettings('gameDifficultySettings', gameDifficultySettings)
   saveSettings('incorrectGuessCount', incorrectGuesses)
   saveSettings('incorrectGuessedLetters', guessedLetters)
-  saveSettings('correctGuessedLetters', correctGuessedLetters)
-  saveSettings('winStreak', winStreak)
   saveSettings('lostGame', lostGame)
   saveSettings('submissionWarning', submissionWarning)
-  saveSettings('gameDifficultySettings', gameDifficultySettings)
+  saveSettings('uniqueLetters', uniqueLetters)
+  saveSettings('winStreak', winStreak)
 }
 
 const continueGame = wordInfo => {
-  const incorrectGuesses = 0
-  const {word, uniqueLetters} = wordInfo
-  const guessedLetters = ""
   const correctGuessedLetters = ""
+  const guessedLetters = ""
+  const incorrectGuesses = 0
   const lostGame = "false"
   const submissionWarning = ""
+  const {word, uniqueLetters} = wordInfo
 
+  saveSettings('correctGuessedLetters', correctGuessedLetters)
   saveSettings('currentWord', word)
-  saveSettings('uniqueLetters', uniqueLetters)
   saveSettings('incorrectGuessCount', incorrectGuesses)
   saveSettings('incorrectGuessedLetters', guessedLetters)
-  saveSettings('correctGuessedLetters', correctGuessedLetters)
   saveSettings('lostGame', lostGame)
+  saveSettings('uniqueLetters', uniqueLetters)
 }
 
 const checkGuess = guessLetter => {
@@ -62,6 +61,7 @@ const checkGuess = guessLetter => {
 const saveCorrectGuess = letter => {
   let correctGuesses = getCorrectGuessedLetters()
   let submissionWarning = getSubmissionWarning()
+  
   if(correctGuesses.includes(letter)) {
     submissionWarning = "You got that one already.\nPick another letter, awesome human!"
     saveSettings('submissionWarning', submissionWarning)
@@ -77,6 +77,7 @@ const saveIncorrectGuess = letter => {
   let incorrectGuessCount = getIncorrectGuessCount()
   let incorrectGuesses = getIncorrectGuessedLetters()
   let submissionWarning = getSubmissionWarning()
+  
   if(incorrectGuesses.includes(letter)) {
     submissionWarning = "You've already tried that letter.\nTry a different one."
     saveSettings('submissionWarning', submissionWarning)
@@ -112,4 +113,4 @@ const checkForLoss = () => {
   }
 }
 
-module.exports = {newGame, checkGuess, continueGame}
+module.exports = {checkGuess, continueGame, newGame}

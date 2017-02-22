@@ -29,13 +29,13 @@ const getSettings = name => {
 
 const getCorrectGuessedLetters = () => getSettings('correctGuessedLetters')
 const getCurrentWord = () => getSettings('getCurrentWord')
+const getGameDifficultySettings = () => getSettings('gameDifficultySettings')
 const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
 const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
-const getUniqueLetters = () => getSettings('uniqueLetters')
-const getWinStreak = () => parseInt(getSettings('winStreak'))
 const getLostGame = () => getSettings('lostGame')
 const getSubmissionWarning = () => getSettings('submissionWarning')
-const getGameDifficultySettings = () => getSettings('gameDifficultySettings')
+const getUniqueLetters = () => getSettings('uniqueLetters')
+const getWinStreak = () => parseInt(getSettings('winStreak'))
 
 const saveGameDifficultySettings = settingsObject => {
   console.log('settings Object', settingsObject)
@@ -44,14 +44,14 @@ const saveGameDifficultySettings = settingsObject => {
 
 let getGameInfo = () => {
   return {
-    gameDifficultySettings:getSettings('gameDifficultySettings'),
-    submissionWarning: getSettings('submissionWarning'),
-    lostGame: getSettings('lostGame'),
-    winStreak: parseInt(getSettings('winStreak')),
     correctGuessedLetters: getSettings('correctGuessedLetters'),
     currentWord: getSettings('currentWord'),
+    gameDifficultySettings:getSettings('gameDifficultySettings'),
     incorrectGuessCount: parseInt(getSettings('incorrectGuessCount')),
-    incorrectGuessedLetters: getSettings('incorrectGuessedLetters')
+    incorrectGuessedLetters: getSettings('incorrectGuessedLetters'),
+    lostGame: getSettings('lostGame'),
+    submissionWarning: getSettings('submissionWarning'),
+    winStreak: parseInt(getSettings('winStreak')),
   }
 }
 
@@ -59,15 +59,14 @@ module.exports = {
   clear,
   getCorrectGuessedLetters,
   getCurrentWord,
+  getGameDifficultySettings,
+  getGameInfo,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
-  getGameInfo,
-  getUniqueLetters,
-  getSettings, 
-  saveSettings,
-  getWinStreak,
   getLostGame,
   getSubmissionWarning,
+  getUniqueLetters,
+  getWinStreak,
   saveGameDifficultySettings,
-  getGameDifficultySettings
+  saveSettings,
 }
