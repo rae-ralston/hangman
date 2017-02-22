@@ -3,7 +3,7 @@ const {
   getAnyNewWord, 
   getSpecificLengthWord, 
   oneRandomWord
-} = require('../models/game')
+} = require('../models/gameStatus')
 
 describe('getAnyNewWord()', () => {
 
