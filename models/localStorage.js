@@ -22,24 +22,29 @@ const getSettings = name => {
     || name === 'submissionWarning'
     || name === 'gameDifficultySettings') 
     return localStorage.getItem(name)
-  else if (name === 'incorrectGuessCount' || name === 'winStreak') 
+  else if (name === 'incorrectGuessCount' 
+    || name === 'winStreak'
+    || name === 'minWordLength'
+    || name === 'difficulty') 
     return (parseInt(localStorage.getItem(name)))
   else {console.log('Error in getting setting ' + name)}
 }
 
 const getCorrectGuessedLetters = () => getSettings('correctGuessedLetters')
-const getCurrentWord = () => getSettings('getCurrentWord')
+const getCurrentWord = () => getSettings('currentWord')
+const getDifficulty = () => getSettings('difficulty')
 const getGameDifficultySettings = () => getSettings('gameDifficultySettings')
 const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
 const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getLostGame = () => getSettings('lostGame')
+const getMinWordLength = () => getSettings('minWordLength')
 const getSubmissionWarning = () => getSettings('submissionWarning')
 const getUniqueLetters = () => getSettings('uniqueLetters')
 const getWinStreak = () => parseInt(getSettings('winStreak'))
 
-const saveGameDifficultySettings = settingsObject => {
-  console.log('settings Object', settingsObject)
-  saveSettings('gameDifficultySettings', settingsObject)
+const saveGameDifficultySettings = (difficulty, minWordLength) => {
+  saveSettings('difficulty', difficulty)
+  saveSettings('minWordLength', minWordLength)
 }
 
 let getGameInfo = () => {

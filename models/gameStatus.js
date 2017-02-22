@@ -11,13 +11,12 @@ const {
 
 const newGame = wordInfo => {
   const correctGuessedLetters = ""
-  const gameDifficultySettings = {difficulty: 1, minWordLength: 3}
   const guessedLetters = ""
   const incorrectGuesses = 0
   const lostGame = "false"
   const submissionWarning = ""
   const winStreak = 0
-  const {word, uniqueLetters} = wordInfo
+  const {word, uniqueLetters, minWordLength, difficulty} = wordInfo
 
   saveSettings('correctGuessedLetters', correctGuessedLetters)
   saveSettings('currentWord', word)

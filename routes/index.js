@@ -30,13 +30,15 @@ router.all('/newgame', (request, response) => {
 
   if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
 
-  saveGameDifficultySettings({difficulty, minWordLength})
+  saveGameDifficultySettings(difficulty, minWordLength)
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
+      wordInfo.difficulty = difficulty
+      wordInfo.minWordLength = minWordLength
       newGame(wordInfo)
       response.redirect('/play')
     })
