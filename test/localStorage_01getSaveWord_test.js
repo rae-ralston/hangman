@@ -1,21 +1,21 @@
 import {expect} from 'chai'
 const {
+  clear,
   saveSettings,
   getCurrentWord,
   getSettings,
 } = require('../models/localStorage')
 
-describe('saveSettings() & getSettings()', () => {
+describe('saveSettings() & getSettings(): ', () => {
+  
+  saveSettings('currentWord', 'bannana')
 
-
-  it('save & get settings are functions', () => {
+  it('are functions', () => {
     expect(saveSettings).to.be.a('function')
     expect(getSettings).to.be.a('function')
   })
 
-  saveSettings('currentWord', 'bannana')
-
-  it('should save a word', () => {
+  it('should save a word & get it back from localstorage', () => {
     expect(getSettings('currentWord')).to.equal('bannana')
   })
 })
