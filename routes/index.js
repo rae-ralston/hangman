@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-
 const { 
   displayHangmanWord,
   getRandomLevel,
@@ -11,7 +10,8 @@ const {
 } = require('../models/words')
 const {
   clear, 
-  getGameDifficultySettings,
+  getDifficulty,
+  getMinWordLength,
   getGameInfo,  
   saveGameDifficultySettings,
 } = require('../models/localStorage')
@@ -30,29 +30,34 @@ router.all('/newgame', (request, response) => {
 
   if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
 
-  saveGameDifficultySettings({difficulty, minWordLength})
+  saveGameDifficultySettings(difficulty, minWordLength)
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
+      wordInfo.difficulty = difficulty
+      wordInfo.minWordLength = minWordLength
+      console.log('wordinfo', wordInfo)
       newGame(wordInfo)
       response.redirect('/play')
     })
     .catch(err => console.error(err))
 })
 
-router.get('/continueGame', (request, response) => {
-  let {difficulty, minWordLength} = getGameDifficultySettings()
-  difficulty = 1
-  minWordLength = 5
+router.get('/continuegame', (request, response) => {
+  let difficulty = getDifficulty()
+  let minWordLength = getMinWordLength()
+
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
       return {word, uniqueLetters: uniqueLetters(word)}
     })
     .then(wordInfo => {
+      wordInfo.difficulty = difficulty
+      wordInfo.minWordLength = minWordLength
       continueGame(wordInfo)
       response.redirect('/play')
     })

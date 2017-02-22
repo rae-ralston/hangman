@@ -1,7 +1,7 @@
 const {LocalStorage} = require('node-localstorage')
-localStorage = new LocalStorage('./localMemory');
+const localStorage = new LocalStorage('./localMemory');
 
-const saveSettings = (name, settings) => {
+let saveSettings = (name, settings) => {
   const saveName = name.toString();
   const saveSettings = settings.toString();
   console.log('setting storage for', name, ' : ', settings);
@@ -19,27 +19,30 @@ const getSettings = name => {
     || name === 'incorrectGuessedLetters' 
     || name === 'correctGuessedLetters'
     || name === 'lostGame'
-    || name === 'submissionWarning'
-    || name === 'gameDifficultySettings') 
+    || name === 'submissionWarning') 
     return localStorage.getItem(name)
-  else if (name === 'incorrectGuessCount' || name === 'winStreak') 
+  else if (name === 'incorrectGuessCount' 
+    || name === 'winStreak'
+    || name === 'minWordLength'
+    || name === 'difficulty') 
     return (parseInt(localStorage.getItem(name)))
   else {console.log('Error in getting setting ' + name)}
 }
 
 const getCorrectGuessedLetters = () => getSettings('correctGuessedLetters')
-const getCurrentWord = () => getSettings('getCurrentWord')
-const getGameDifficultySettings = () => getSettings('gameDifficultySettings')
+const getCurrentWord = () => getSettings('currentWord')
+const getDifficulty = () => getSettings('difficulty')
 const getIncorrectGuessCount = () => parseInt(getSettings('incorrectGuessCount'))
 const getIncorrectGuessedLetters = () => getSettings('incorrectGuessedLetters')
 const getLostGame = () => getSettings('lostGame')
+const getMinWordLength = () => getSettings('minWordLength')
 const getSubmissionWarning = () => getSettings('submissionWarning')
 const getUniqueLetters = () => getSettings('uniqueLetters')
 const getWinStreak = () => parseInt(getSettings('winStreak'))
 
-const saveGameDifficultySettings = settingsObject => {
-  console.log('settings Object', settingsObject)
-  saveSettings('gameDifficultySettings', settingsObject)
+const saveGameDifficultySettings = (difficulty, minWordLength) => {
+  saveSettings('difficulty', difficulty)
+  saveSettings('minWordLength', minWordLength)
 }
 
 let getGameInfo = () => {
@@ -59,11 +62,13 @@ module.exports = {
   clear,
   getCorrectGuessedLetters,
   getCurrentWord,
-  getGameDifficultySettings,
+  getDifficulty,
   getGameInfo,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
   getLostGame,
+  getMinWordLength,
+  getSettings,
   getSubmissionWarning,
   getUniqueLetters,
   getWinStreak,

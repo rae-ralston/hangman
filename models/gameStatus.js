@@ -11,20 +11,20 @@ const {
 
 const newGame = wordInfo => {
   const correctGuessedLetters = ""
-  const gameDifficultySettings = {difficulty: 1, minWordLength: 3}
   const guessedLetters = ""
   const incorrectGuesses = 0
   const lostGame = "false"
   const submissionWarning = ""
   const winStreak = 0
-  const {word, uniqueLetters} = wordInfo
+  const {word, uniqueLetters, minWordLength, difficulty} = wordInfo
 
   saveSettings('correctGuessedLetters', correctGuessedLetters)
   saveSettings('currentWord', word)
-  saveSettings('gameDifficultySettings', gameDifficultySettings)
+  saveSettings('difficulty', difficulty)
   saveSettings('incorrectGuessCount', incorrectGuesses)
   saveSettings('incorrectGuessedLetters', guessedLetters)
   saveSettings('lostGame', lostGame)
+  saveSettings('minWordLength', minWordLength)
   saveSettings('submissionWarning', submissionWarning)
   saveSettings('uniqueLetters', uniqueLetters)
   saveSettings('winStreak', winStreak)
@@ -63,7 +63,7 @@ const saveCorrectGuess = letter => {
   let submissionWarning = getSubmissionWarning()
   
   if(correctGuesses.includes(letter)) {
-    submissionWarning = "You got that one already.\nPick another letter, awesome human!"
+    submissionWarning = "You got that letter already!"
     saveSettings('submissionWarning', submissionWarning)
   } else {
     correctGuesses += letter
@@ -79,7 +79,7 @@ const saveIncorrectGuess = letter => {
   let submissionWarning = getSubmissionWarning()
   
   if(incorrectGuesses.includes(letter)) {
-    submissionWarning = "You've already tried that letter.\nTry a different one."
+    submissionWarning = "You've already tried that letter."
     saveSettings('submissionWarning', submissionWarning)
   } else {
     incorrectGuessCount += 1

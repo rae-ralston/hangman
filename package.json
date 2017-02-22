@@ -15,7 +15,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "debug": "node ./bin/www --inspect",
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --compilers js:babel-core/register"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-plugin-istanbul": "^4.0.0",
     "babel-preset-env": "^1.1.4",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
