@@ -12,14 +12,10 @@ INDEX HEADING
   flex-direction: column;
 }
 
-.hero-head p,
-.hero-head p:not(:last-child) {
-  margin-bottom: 2px;
-}
-
-.space {
-  min-width: 1em;
-  max-width: 1em;
+.hero-head h3,
+.hero-head h3:not(:last-child),
+.hero-head h3:not(:first-child) {
+  margin: 5px 0px;
 }
 
 .red {
