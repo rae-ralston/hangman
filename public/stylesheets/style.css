@@ -1,8 +1,178 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
+}
+
+
+
+/***********************************
+INDEX HEADING
+***********************************/
+.hero-head {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-head h3,
+.hero-head h3:not(:last-child),
+.hero-head h3:not(:first-child) {
+  margin: 5px 0px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+
+/***********************************
+game area
+***********************************/
+.hung-man {
+  font-family: 'Droid Sans Mono', monospace;
+}
+
+.hung-man-div {
+  min-width: 80px;
+}
+
+.hung-man-div p,
+.hung-man-div p:not(:last-child) {
+  margin-bottom: 0;
+}
+
+.newgame-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#splash-logo {
+  font-size: 3em;
+}
+
+.splash-center-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-game-form-container{
+  display: flex;
+  justify-content: center;
+  max-width: 300px;
+  padding: 20px;
+  margin: 0px;
+}
+
+.new-game-form-container div {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0px;
+}
+
+.new-game-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/***********************************
+GAME AREA STYLING
+***********************************/
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.gameplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 20px 0px 20px;
+}
+
+.gameplay-letters {
+  margin-bottom: 5px;
+}
+
+.blank-letters:first-of-type {
+    min-height: 40px;
+}
+.blank-letters {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2px;
+}
+
+.blankletter-lines {
+  min-height: 3px;
+  max-height: 3px;
+  max-width: 15px;
+  min-width: 15px;
+  margin:3px;
+  background-color: black;
+}
+
+.form-container {
+  min-width: 300px;
+}
+
+#hangman-guess-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.submission-warning {
+  padding: 15px;
+  min-height: 70px;
+  color: red;
+  font-size: .9em;
+  border: 1px solid #D3D3D3;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.hangman-letters {
+  margin: 3px;
+  max-width: 15px;
+  min-width: 15px;
+  text-align: center;
+  align-self: flex-end;
+}
+
+.gameStatus-sidebar {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px;
+}
+
+.incorrectGuessCount {
+  font-size: 4em;
+  margin: 0px;
+}
+
+.incorrectGuessedLetters {
+  display: flex;
+  flex-direction: row;
+}
+
+.incorrectletters {
+  font-size: 1.8em;
+  margin: 5px;
+}
+
+.modal-card-body img {
+  max-height: 300px;
 }

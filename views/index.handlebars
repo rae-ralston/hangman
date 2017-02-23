@@ -1,0 +1,77 @@
+<div class="content">
+  <div class="hero-head">
+    <h1>HANGMAN</h1>
+    <h3>you have <span class="red">6</span> guesses to save a man's life... can you do it?</h3>
+    <h3>You've won <span class="green">{{winStreak}}</span> games in a row.</h3>
+  </div>
+  <div class="game">
+    <div class="hung-man-div">
+      {{#each hungMan}}
+        <p class="hung-man">{{this}}</p>
+      {{/each}}
+    </div>
+    <div class="gameplay box home-box">
+      <div class="gameplay-letters">
+        <div class="each-letter">
+          <div class="blank-letters"> 
+            {{#each hangmanArray}}
+            <div class="hangman-letters">{{this}}</div>
+            {{/each}}
+          </div>
+          <div class="blank-letters"> 
+            {{#each currentWord}}
+            <div class="blankletter-lines"></div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      <div class="form-container">
+        <div id="game-guess-form" class="control">
+          <form id="hangman-guess-form" method="post" action="/checkAnswer">
+            <input class="input submission-form" name="guess" placeholder="Guess a Letter" type="text"> </input>
+            <input id="check-btn" type="submit" value="Check Guess" class="button is-primary">
+            </input>
+          </form>
+          <div class="submission-warning">
+            <p class="is-small">{{submissionWarning}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gameStatus-sidebar">
+      <h3>You've guessed incorrectly {{incorrectGuessCount}} times.</h3>
+      <p>Incorrect Letters:</p>
+      <div class="incorrectGuessedLetters">
+        {{#each incorrectGuessedLetters}}
+        <div class="incorrectletters">{{this}}</div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+{{!--   <div>DEVELOPMENT HELPERS</div>
+  <div>currentWord: {{currentWord}}</div>
+  <div>correct guessed letters: {{correctGuessedLetters}}</div>
+  <div>incorrect guessed letters: {{incorrectGuessedLetters}}</div> --}}
+  {{#if lostGame}}
+    <div class="modal is-active">
+  {{else}}
+    <div class="modal">
+  {{/if}}
+      <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Whomp whomp, you lost!</p>
+          </header>
+          <section class="modal-card-body">
+            <img src="{{lostGIF}}">
+          </section>
+          <footer class="modal-card-foot">
+            <a class="button is-primary" href="/continuegame">New Game at Same Difficulty</a>
+            <a class="button" href="/">Change Your Level</a>
+          </footer>
+        </div>
+      </div>
+    </div>
+</div>
+
+

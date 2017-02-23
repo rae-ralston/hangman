@@ -1,47 +1,35 @@
 # Hangman
+Rachel Ralston, 
+[email](rachel@rachelralston.com)  |  [website](http://www.rachelralston.com)  |  [linkedin](http://www.linkedin.com/in/rachelralston)  |  [twitter](http://www.twitter.com/@rachelralston)
 
 ## Installation 
-
+1. Clone repo
+2. install dependancies with `npm install`
+3. run with `npm start`
+4. visit `localhost:3000` to play the game
+5. run tests with `npm test`
 
 ## Parameters
 
 ### MVP
-- Get a word from the api: http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words
-- Losing Condition: User get's 6 incorrect guesses.
-- Winning Condition: User guesses word.
+- [X] Get a word from the [api](http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words)
+- [X] Losing Condition: User get's 6 incorrect guesses.
+- [X] Winning Condition: User guesses word one letter at a time.
 
-- User must be able to see the total number of letters in the Mystery Word.
-- Correct guessed letters show while unguessed letters remain hidden.
-- Number of guesses remaining is displayed
-- List of incorrect guesses is displayed.
+- [X] User must be able to see the total number of letters in the Mystery Word.
+- [X] Correct guessed letters show while unguessed letters remain hidden.
+- [X] Number of guesses remaining is displayed
+- [X] List of incorrect guesses is displayed.
 
 ### Stretch Goals
-- Configure difficulty level
-- Hangman diagram... ASCII maybe? 
-    - http://www.berkeleyinternet.com/perl/node30.html
-    - http://ascii.co.uk/art/hangman
-- Support for guessing full word
-- multi word game
-  + add score += 1 to correct answer logic
-  + slice used words out of total words array
+- [X] Configure difficulty level
+- [X] Hangman diagram... ASCII maybe? 
+  + http://ascii.co.uk/art/hangman
+- [X] Multi word game
+  + TODO slice used words out of total words array
+- [ ] Support for guessing full word
+- [ ] Multiplayer with socket.io (or similar)
 
-### Todo
-- write a route that can get the word from the API
-- write game logic that starts a game
-- write logic for check guess
-  - if correct push to letter display 
-      - check if game won
-  - if incorrect 
-      - --guess left, 
-      - add to guessed letters, 
-      - STRETCH add hanging man view
-      - check if game lost
-- write game logic that ends a game
-    + if won give won data to modal
-    + if lost give lost data modal
-    + (both modal have restart game, stretch: multi word games)
-
-
-## Contact
-
-Rachel Ralston, rachel@rachelralston.com
+### Issues
+- when a player wins more than one game and then looses the 'won games in a row' doesn't reset to 0
+- more testing coverage needed
