@@ -1,6 +1,6 @@
 # Hangman
 Rachel Ralston, 
-(email)[rachel@rachelralston.com]  |  (website)[http://www.rachelralston.com]  |  (linkedin)[http://www.linkedin.com/in/rachelralston]  |  (twitter)[http://www.twitter.com/@rachelralston]
+[email](rachel@rachelralston.com)  |  [website](http://www.rachelralston.com)  |  [linkedin](http://www.linkedin.com/in/rachelralston)  |  [twitter](http://www.twitter.com/@rachelralston)
 
 ## Installation 
 1. Clone repo
@@ -12,7 +12,7 @@ Rachel Ralston,
 ## Parameters
 
 ### MVP
-- [X] Get a word from the (api)[http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words]
+- [X] Get a word from the [api](http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words)
 - [X] Losing Condition: User get's 6 incorrect guesses.
 - [X] Winning Condition: User guesses word one letter at a time.
 
