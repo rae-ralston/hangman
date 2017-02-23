@@ -20,25 +20,29 @@ const {hungMan} = require('../models/hangman')
 const sadGifs = require('../models/sadGifs')
 
 router.get('/', (request, response) => {
+  console.log('cookie?', request.cookies)
   clear()
   response.render('landing', {hungMan:hungMan.whole})
 })
 
 router.all('/newgame', (request, response) => {
   const difficulty = request.body.selectDifficulty
-  let minWordLength = request.body.selectWordLength
-
+  const minWordLength = request.body.selectWordLength
+  let cookie = request.cookies
+  cookie.difficulty = difficulty
+  
   if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
+  cookie.minWordLength = minWordLength
+  console.log('cookie?', request.cookies)
 
-  saveGameDifficultySettings(difficulty, minWordLength)
   getSpecificLengthWord(difficulty, minWordLength)
     .then(words => oneRandomWord(words))
     .then(word => {
-      return {word, uniqueLetters: uniqueLetters(word)}
+      return [word, uniqueLetters(word)]
     })
     .then(wordInfo => {
-      wordInfo.difficulty = difficulty
-      wordInfo.minWordLength = minWordLength
+      cookie.minWordLength = minWordLength
+      
       console.log('wordinfo', wordInfo)
       newGame(wordInfo)
       response.redirect('/play')
@@ -65,6 +69,7 @@ router.get('/continuegame', (request, response) => {
 })
 
 router.get('/play', (request, response) => {
+  console.log('cookie?', request.cookies)
   const gameInfo = getGameInfo()
   let {
     correctGuessedLetters,

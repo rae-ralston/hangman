@@ -11,6 +11,17 @@ let saveSettings = (name, settings) => {
     : console.log('Error in saving state of ' + saveName + ': ' + saveSettings)
 }
 
+let saveCookieSettings = (name, settings) => {
+  const saveName = name.toString();
+  const saveSettings = settings.toString();
+  console.log('setting cookie storage for', name, ' : ', settings);
+
+  (typeof(saveName) === 'string' && typeof(saveSettings) === 'string')
+    ? request.cookies.saveName = saveSettings
+    : console.log('Error in saving state of ' + saveName + ': ' + saveSettings)
+}
+
+
 const clear = () => localStorage.clear()
 
 const getSettings = name => {
@@ -41,8 +52,8 @@ const getUniqueLetters = () => getSettings('uniqueLetters')
 const getWinStreak = () => parseInt(getSettings('winStreak'))
 
 const saveGameDifficultySettings = (difficulty, minWordLength) => {
-  saveSettings('difficulty', difficulty)
-  saveSettings('minWordLength', minWordLength)
+  saveCookieSettings('difficulty', difficulty)
+  saveCookieSettings('minWordLength', minWordLength)
 }
 
 let getGameInfo = () => {
