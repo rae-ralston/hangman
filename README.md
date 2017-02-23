@@ -10,6 +10,11 @@ Rachel Ralston: [email](rachel@rachelralston.com)  |  [website](http://www.rache
 
 ## Project Walkthrough
 
+**About**
+    This project took me 18-20 hrs all together, most of which was one 12 hr marathon. I did rabit hole a bit (console game? That'd be fun! Let's go with full stack though. React? ...My time is super limited, so let's prioritize done over fancy tech.) It was well within my comfort zone. I have a lot of thoughts on how to improve, first is to refactor to use cookie storage (started on a branch) & fix a couple small known bugs, then make it a multi player game with socket.io (I've never used the technology and I'm interested in it). Finally I'd polish the UI.
+
+    If I were to expand it into users I'd probably have to stop using local storage and switch to a database that would hold things like users, their individual games, multi-player games, etc.
+
 **Stack**: 
 - Routing: Express
 - Javascript: ES6 & Babel
@@ -46,6 +51,9 @@ Rachel Ralston: [email](rachel@rachelralston.com)  |  [website](http://www.rache
 - package.json: project setup, scripts & modules
 - README.md: You're reading this. Good job.
 
+**Branches**:
+cookieStorage
+    When I initally went through the project I was having trouble with localStorage and because I was short on time and was having trouble making it work I choose to use a node package that reproduces local storage server side. I was talking over my project with a friend and they reasoned that this would mean that multiple browsers couldn't play the game at once. I thought that was smart, so I started to figure out how to store the game in a cookie, but ran out of time. 
  document your thought process and/or code structure, and describe any creative
 extensions attempted or implemented
 

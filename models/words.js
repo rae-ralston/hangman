@@ -1,4 +1,3 @@
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const getAnyNewWord = () => {
@@ -49,7 +48,7 @@ const getRandomSadGif = gifArray => {
   return gifArray[i]
 }
 
-const getRandomLevel = () => getRandomInt(1, 10)
+const getRandomLevel = () => getRandomInt(1, 9)
 
 const getRandomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1) + min)

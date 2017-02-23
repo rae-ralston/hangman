@@ -47,6 +47,7 @@ const continueGame = wordInfo => {
 }
 
 const checkGuess = guessLetter => {
+  guessLetter = guessLetter.toLowerCase()
   let submissionWarning = getSubmissionWarning()
   if(guessLetter.length > 1) {
     submissionWarning = "Only 1 letter at a time."
@@ -54,7 +55,6 @@ const checkGuess = guessLetter => {
     return
   }
   if(guessLetter.match("^(0|[1-9][0-9]*)$") !== null) {
-    let submissionWarning = getSubmissionWarning()
     submissionWarning = "Letters only please."
     saveSettings('submissionWarning', submissionWarning)
     return

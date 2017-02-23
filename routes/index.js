@@ -86,6 +86,7 @@ router.get('/play', (request, response) => {
     incorrectGuessedLetters = incorrectGuessedLetters.split('')
   }
   let hangmanArray = displayHangmanWord(correctGuessedLetters, currentWord)
+  currentWord = currentWord.join('')
   
   response.render('index', {
     hungMan:hungMan[incorrectGuessCount],
