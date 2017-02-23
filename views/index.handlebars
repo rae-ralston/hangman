@@ -1,8 +1,8 @@
 <div class="content">
   <div class="hero-head">
     <h1>HANGMAN</h1>
-    <p>you have 6 guesses to save a man's life... can you do it?</p>
-    <p>You've won {{winStreak}} games in a row.</p>
+    <h3>you have <span class="red">6</span> guesses to save a man's life... can you do it?</h3>
+    <h3>You've won <span class="green">{{winStreak}}</span> games in a row.</h3>
   </div>
   <div class="game">
     <div class="hung-man-div">
@@ -39,8 +39,8 @@
       </div>
     </div>
     <div class="gameStatus-sidebar">
-      <h3>You've guessed {{incorrectGuessCount}} times.</h3>
-      <p>Incorrect Guesses:</p>
+      <h3>You've guessed incorrectly {{incorrectGuessCount}} times.</h3>
+      <p>Incorrect Letters:</p>
       <div class="incorrectGuessedLetters">
         {{#each incorrectGuessedLetters}}
         <div class="incorrectletters">{{this}}</div>
@@ -48,10 +48,10 @@
       </div>
     </div>
   </div>
-  <div>DEVELOPMENT HELPERS</div>
+{{!--   <div>DEVELOPMENT HELPERS</div>
   <div>currentWord: {{currentWord}}</div>
   <div>correct guessed letters: {{correctGuessedLetters}}</div>
-  <div>incorrect guessed letters: {{incorrectGuessedLetters}}</div>
+  <div>incorrect guessed letters: {{incorrectGuessedLetters}}</div> --}}
   {{#if lostGame}}
     <div class="modal is-active">
   {{else}}
@@ -66,8 +66,8 @@
             <img src="{{lostGIF}}">
           </section>
           <footer class="modal-card-foot">
-            <a class="button is-success" href="/continuegame">New At Same Difficulty</a>
-            <a class="button is-success" href="/">Change Your Level</a>
+            <a class="button is-primary" href="/continuegame">New Game at Same Difficulty</a>
+            <a class="button" href="/">Change Your Level</a>
           </footer>
         </div>
       </div>
