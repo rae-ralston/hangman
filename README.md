@@ -22,10 +22,8 @@ Rachel Ralston,
 
 ### Stretch Goal Specs
 - [X] Configure difficulty level
-- [X] Hangman diagram... ASCII maybe? 
-  + http://ascii.co.uk/art/hangman
+- [X] Hangman diagram... [ASCII](http://ascii.co.uk/art/hangman) maybe? 
 - [X] Multiple games in a row
-  + TODO 
 - [ ] Support for guessing full word
 - [ ] Multiplayer with socket.io (or similar)
 
@@ -33,5 +31,5 @@ Rachel Ralston,
 - When a player wins more than one game and then looses the 'won games in a row' doesn't reset to 0
 - Slice used words out of total words array for multi game streaks
 - Something fun happens when you win a game.
-- Polish UI
+- Polish UI.. maybe rework to look like a console game?
 - More testing coverage needed.
