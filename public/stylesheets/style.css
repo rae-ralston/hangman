@@ -1,26 +1,39 @@
-/***********************************
-GENERAL STYLING
-***********************************/
 a {
   color: #00B7FF;
 }
 
+
+
+/***********************************
+INDEX HEADING
+***********************************/
 .hero-head {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .hero-head p,
 .hero-head p:not(:last-child) {
   margin-bottom: 2px;
 }
+
 .space {
   min-width: 1em;
   max-width: 1em;
 }
 
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+
+/***********************************
+game area
+***********************************/
 .hung-man {
   font-family: 'Droid Sans Mono', monospace;
 }
@@ -28,6 +41,7 @@ a {
 .hung-man-div {
   min-width: 80px;
 }
+
 .hung-man-div p,
 .hung-man-div p:not(:last-child) {
   margin-bottom: 0;
@@ -69,7 +83,6 @@ a {
 
 
 
-
 /***********************************
 GAME AREA STYLING
 ***********************************/
@@ -105,8 +118,6 @@ GAME AREA STYLING
   flex-direction: row;
   margin-bottom: 2px;
 }
-
-
 
 .blankletter-lines {
   min-height: 3px;
