@@ -1,6 +1,5 @@
 # Hangman
-Rachel Ralston, 
-[email](rachel@rachelralston.com)  |  [website](http://www.rachelralston.com)  |  [linkedin](http://www.linkedin.com/in/rachelralston)  |  [twitter](http://www.twitter.com/@rachelralston)
+Rachel Ralston: [email](rachel@rachelralston.com)  |  [website](http://www.rachelralston.com)  |  [linkedin](http://www.linkedin.com/in/rachelralston)  |  [twitter](http://www.twitter.com/@rachelralston)
 
 ## Installation 
 1. Clone repo [from Github](https://github.com/rachel-ftw/hangman)
