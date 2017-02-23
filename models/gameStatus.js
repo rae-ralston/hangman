@@ -47,6 +47,18 @@ const continueGame = wordInfo => {
 }
 
 const checkGuess = guessLetter => {
+  let submissionWarning = getSubmissionWarning()
+  if(guessLetter.length > 1) {
+    submissionWarning = "Only 1 letter at a time."
+    saveSettings('submissionWarning', submissionWarning)
+    return
+  }
+  if(guessLetter.match("^(0|[1-9][0-9]*)$") !== null) {
+    let submissionWarning = getSubmissionWarning()
+    submissionWarning = "Letters only please."
+    saveSettings('submissionWarning', submissionWarning)
+    return
+  }
   let uniqueLetters = getUniqueLetters()
 
   if(uniqueLetters.includes(guessLetter)) {
@@ -63,7 +75,7 @@ const saveCorrectGuess = letter => {
   let submissionWarning = getSubmissionWarning()
   
   if(correctGuesses.includes(letter)) {
-    submissionWarning = "You got that letter already!"
+    submissionWarning = "You've already got that letter!"
     saveSettings('submissionWarning', submissionWarning)
   } else {
     correctGuesses += letter

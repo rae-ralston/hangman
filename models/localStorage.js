@@ -49,10 +49,11 @@ let getGameInfo = () => {
   return {
     correctGuessedLetters: getSettings('correctGuessedLetters'),
     currentWord: getSettings('currentWord'),
-    gameDifficultySettings:getSettings('gameDifficultySettings'),
+    difficulty: getSettings('difficulty'),
     incorrectGuessCount: parseInt(getSettings('incorrectGuessCount')),
     incorrectGuessedLetters: getSettings('incorrectGuessedLetters'),
     lostGame: getSettings('lostGame'),
+    minWordLength: getSettings('minWordLength'),
     submissionWarning: getSettings('submissionWarning'),
     winStreak: parseInt(getSettings('winStreak')),
   }

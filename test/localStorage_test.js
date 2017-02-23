@@ -3,16 +3,16 @@ const {
   clear,
   getCorrectGuessedLetters,
   getCurrentWord,
-  getGameDifficultySettings,
+  getDifficulty,
   getGameInfo,
   getIncorrectGuessCount,
   getIncorrectGuessedLetters,
   getLostGame,
+  getMinWordLength,
   getSettings,
   getSubmissionWarning,
   getUniqueLetters,
   getWinStreak,
-  saveGameDifficultySettings,
   saveSettings,
 } = require('../models/localStorage')
 
@@ -62,18 +62,43 @@ describe('getCurrentWord(): ', () => {
   })
 })
 
-// describe('getGameDifficultySettings(): ', () => {
-//   it('is a functions', () => {
-//     expect(getGameDifficultySettings).to.be.a('function')
-//   })
+describe('getDifficulty(): ', () => {
+  it('is a functions', () => {
+    expect(getDifficulty).to.be.a('function')
+  })
 
-//   it('gets game\'s diffiuclty setting', () => {
-//     let difficultySettings = {difficulty: 3, minWordLength: 5}
-//     saveGameDifficultySettings(difficultySettings)
-//     let settings = getGameDifficultySettings()
-//     console.dir('!!!!!!!',settings)
-//     expect(getGameDifficultySettings()).to.be.a('object')
-//     expect(settings.difficulty).to.equal(3)
-//     expect(settings.minWordLength).to.equal(5)
-//   })
-// })
+  it('gets game\'s difficulty setting', () => {
+    saveSettings('difficulty', 3)
+    expect(getDifficulty()).to.equal(3)
+  })
+})
+
+describe('getMinWordLength(): ', () => {
+  it('is a functions', () => {
+    expect(getMinWordLength).to.be.a('function')
+  })
+
+  it('gets game\'s difficulty setting', () => {
+    saveSettings('minWordLength', 5)
+    expect(getMinWordLength()).to.equal(5)
+  })
+})
+
+describe('getGameInfo(): ', () => {
+  it('is a functions', () => {
+    expect(getGameInfo).to.be.a('function')
+  })
+
+  //TODO make this test
+})
+
+describe('getMinWordLength(): ', () => {
+  it('is a functions', () => {
+    expect(getMinWordLength).to.be.a('function')
+  })
+
+  it('gets game\'s difficulty setting', () => {
+    saveSettings('minWordLength', 5)
+    expect(getMinWordLength()).to.equal(5)
+  })
+})
