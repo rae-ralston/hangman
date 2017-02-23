@@ -21,7 +21,6 @@ let saveCookieSettings = (name, settings) => {
     : console.log('Error in saving state of ' + saveName + ': ' + saveSettings)
 }
 
-
 const clear = () => localStorage.clear()
 
 const getSettings = name => {

@@ -9,27 +9,6 @@ const {
   saveSettings,
 } = require('./localStorage')
 
-const newGame = wordInfo => {
-  const correctGuessedLetters = ""
-  const guessedLetters = ""
-  const incorrectGuesses = 0
-  const lostGame = "false"
-  const submissionWarning = ""
-  const winStreak = 0
-  const {word, uniqueLetters, minWordLength, difficulty} = wordInfo
-
-  saveSettings('correctGuessedLetters', correctGuessedLetters)
-  saveSettings('currentWord', word)
-  saveSettings('difficulty', difficulty)
-  saveSettings('incorrectGuessCount', incorrectGuesses)
-  saveSettings('incorrectGuessedLetters', guessedLetters)
-  saveSettings('lostGame', lostGame)
-  saveSettings('minWordLength', minWordLength)
-  saveSettings('submissionWarning', submissionWarning)
-  saveSettings('uniqueLetters', uniqueLetters)
-  saveSettings('winStreak', winStreak)
-}
-
 const continueGame = wordInfo => {
   const correctGuessedLetters = ""
   const guessedLetters = ""
@@ -125,4 +104,4 @@ const checkForLoss = () => {
   }
 }
 
-module.exports = {checkGuess, continueGame, newGame}
+module.exports = {checkGuess, continueGame}

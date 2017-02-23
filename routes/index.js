@@ -20,35 +20,40 @@ const {hungMan} = require('../models/hangman')
 const sadGifs = require('../models/sadGifs')
 
 router.get('/', (request, response) => {
+  response.cookie('hii', 'yes')
   console.log('cookie?', request.cookies)
   clear()
   response.render('landing', {hungMan:hungMan.whole})
 })
 
 router.all('/newgame', (request, response) => {
-  const difficulty = request.body.selectDifficulty
-  const minWordLength = request.body.selectWordLength
-  let cookie = request.cookies
-  cookie.difficulty = difficulty
-  
-  if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
-  cookie.minWordLength = minWordLength
-  console.log('cookie?', request.cookies)
+    const difficulty = request.body.selectDifficulty
+    let minWordLength = request.body.selectWordLength
+    let save = request.cookies
+    // console.log('=====', request.cookies.difficulty = 8)
+    save.difficulty = "blerg"
+    if(minWordLength === "Surprise Me") {minWordLength = getRandomLevel()}
+    // save("minWordLength", minWordLength)
+    console.log('minwordlenght', minWordLength)
+    getSpecificLengthWord(difficulty, minWordLength)
+      .then(words => oneRandomWord(words))
+      .then(word => {
+        console.log('cookie', response.cookie)
+        // save("word", word)
+        // save("uniqueLetters", uniqueLetters(word))
+        // save("correctLetters", "")
+        // save("incorrectLetters", "")
+        // save("incorrectGuessCount", 0)
+        // save("lostGame", false)
+        // save("warning", "")
+        // save("winStreak", 0)
+  response.render('landing', {hungMan:hungMan.whole})
 
-  getSpecificLengthWord(difficulty, minWordLength)
-    .then(words => oneRandomWord(words))
-    .then(word => {
-      return [word, uniqueLetters(word)]
-    })
-    .then(wordInfo => {
-      cookie.minWordLength = minWordLength
-      
-      console.log('wordinfo', wordInfo)
-      newGame(wordInfo)
-      response.redirect('/play')
-    })
-    .catch(err => console.error(err))
-})
+        console.log('at the end cokie', request.cookies)
+        response.redirect('/play')
+      })
+      .catch(err => console.error(err))
+  })
 
 router.get('/continuegame', (request, response) => {
   let difficulty = getDifficulty()
